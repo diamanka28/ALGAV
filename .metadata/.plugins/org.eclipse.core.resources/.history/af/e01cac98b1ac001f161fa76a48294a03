@@ -17,4 +17,4 @@ class animal(object):
         self.nb_patte= patte
         
     def affiche(self):
-        print("animal :  agé de ")
+        print("animal : "+ self.nb_patte + " agé de "+ self.age)

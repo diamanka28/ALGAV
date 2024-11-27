@@ -3,6 +3,7 @@ Created on 27 nov. 2024
 
 @author: diamanka
 '''
+from inspect import AGEN_CLOSED
 
 print("bienvenue à pydev")
 v="je ne peut me permettre de tout dire"
@@ -17,4 +18,4 @@ class animal(object):
         self.nb_patte= patte
         
     def affiche(self):
-        print("animal :  agé de ")
+        print("animal : "+ self.nb_patte + " agé de "+ self.age)

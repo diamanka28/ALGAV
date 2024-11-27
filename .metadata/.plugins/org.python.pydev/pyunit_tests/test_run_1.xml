@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pydev-testrun version="1.0"?><pydev-testsuite>
+    <summary errors="1" failures="0" finished="true" name="Test Run: 1" tests="0" total_time="Finished in: 0.00 secs."/>
+    <test location="/home/diamanka/git/ALGAV/algav1/src/test1.py" status="error" test="test1" time="0">
+        <stdout/>
+        <stderr><![CDATA[Traceback (most recent call last):
+  File "/home/diamanka/.p2/pool/plugins/org.python.pydev.core_12.2.0.202409031913/pysrc/_pydev_runfiles/pydev_runfiles.py", line 469, in __get_module_from_str
+    mod = __import__(modname)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/home/diamanka/git/ALGAV/algav1/src/test1.py", line 12, in <module>
+    ani.affiche()
+  File "/home/diamanka/git/ALGAV/algav1/src/test.py", line 20, in affiche
+    print("animal : "+ self.nb_patte + " agé de "+ self.age)
+          ~~~~~~~~~~~^~~~~~~~~~~~~~~
+TypeError: can only concatenate str (not "int") to str
+ERROR: Module: test1 could not be imported (file: /home/diamanka/git/ALGAV/algav1/src/test1.py).
+]]></stderr>
+    </test>
+    <launch mode="run">
+        <launch_memento><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration local="true" path="algav1 test1.py (1)"/>
+]]></launch_memento>
+    </launch>
+</pydev-testsuite>
