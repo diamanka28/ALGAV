@@ -1,0 +1,65 @@
+'''
+Created on 27 nov. 2024
+@author: diamanka
+'''
+from utilitaire.patricia_util import *
+
+class PatriciaNode(object):
+    '''
+    cette classe représente le noeud de l'arbre de patricia
+    '''
+
+    def __init__(self, key="", sibling = None, child = None ):
+        '''
+        Constructor
+        ''' 
+        if not self.is_ascii(key):
+            raise ValueError("La clé doit contenir uniquement des caractères ASCII.")
+        self.key = key
+        self.sibling = sibling
+        self.child = child
+    
+    def find_sibling(self, key):
+        """
+        Trouve un frère avec une clé donnée.
+        """
+        current = self.sibling
+        while current:
+            if is_prefix(key, current.key):
+                return current
+            current = current.sibling
+        return None
+    
+    def find_child(self, key):
+        """
+        Trouve un enfant avec une clé donnée.
+        """
+        current = self.child
+        while current:
+            if is_prefix(key, current.key):
+                return current
+            current = current.sibling
+        return None
+    
+    def is_key(self):
+        """
+        Vérifie si ce nœud représente une clé complète (fin de mot).
+        """
+        return is_key(self.key)
+    
+    def make_key(self):
+        """
+        Transforme la clé du nœud en clé terminale.
+        """
+        if not self.is_key():
+            self.key = finish_key(self.key)
+    
+    def is_empty(self):
+        """
+        Vérifie si le nœud est vide.
+        """
+        return not self.key and not self.sibling and not self.child
+
+    
+    
+    

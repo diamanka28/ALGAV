@@ -1,0 +1,36 @@
+Structure d'un nœud Patricia
+
+    Clé (String de 128 caractères maximum) :
+        La clé est la sous-chaîne associée au nœud, représentant un segment du mot ou un mot complet.
+        L’indicateur de fin est intégré directement à la clé (par exemple, via un caractère spécial comme \x00 pour marquer la fin du mot).
+
+    Frère immédiat (Sibling) :
+        Un pointeur vers le nœud frère.
+        Ce nœud représente une clé dont le premier caractère est supérieur (selon l’ordre ASCII) au premier caractère de la clé actuelle.
+        Le frère immédiat permet de gérer efficacement les branches parallèles.
+
+    Enfant immédiat (Child) :
+        Un pointeur vers le nœud enfant.
+        Ce nœud contient une clé dont le premier caractère correspond au plus petit caractère ASCII des enfants possibles du nœud actuel.
+        Cela permet de descendre efficacement dans l’arbre.
+
+    Avantages de cette structure
+
+    Navigation simplifiée :
+        Avec un pointeur vers le frère immédiat et un enfant immédiat, il est possible de parcourir efficacement les branches sans stocker des structures complexes comme des dictionnaires ou des tableaux de nœuds.
+
+    Optimisation mémoire :
+        Cette structure ne nécessite pas d’allouer de l’espace pour des liens inutilisés (comme les autres enfants), contrairement aux tries classiques ou Patricia-Tries plus génériques.
+
+    Respect de l’ordre lexicographique :
+        En suivant l’ordre ASCII pour organiser les frères et enfants, les Patricia-Tries deviennent naturellement triés, ce qui facilite les opérations comme l’énumération de mots dans l’ordre alphabétique.
+
+Concept d’un Arbre Patricia
+
+    Définition :
+        Un arbre Patricia est un conteneur avec un seul attribut : un pointeur vers un nœud Patricia racine.
+        Les autres nœuds (enfants et frères) sont liés entre eux, formant la structure complète.
+
+    Avantages :
+        Cette conception simplifie la gestion de l’arbre, car toutes les opérations (insertion, recherche, suppression) sont initiées à partir de la racine.
+        Les règles de navigation (via les enfants et frères) sont gérées uniquement par les nœuds Patricia, respectant ainsi le principe d’encapsulation.

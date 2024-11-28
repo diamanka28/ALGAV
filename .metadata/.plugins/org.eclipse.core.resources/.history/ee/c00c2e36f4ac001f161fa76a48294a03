@@ -1,0 +1,21 @@
+'''
+Created on 27 nov. 2024
+@author: diamanka
+'''
+from node.patricia_node import PatriciaNode
+
+class PatriciaTree(object):
+    '''
+    Cette classe représente l'arbre de patricia avec notre conception de représentation
+    '''
+
+
+    def __init__(self, params):
+        '''
+        initialise l'arbre de patricia avec une racine vide
+        '''
+        
+        self.root = PatriciaNode()  # Point d'entrée de l'arbre 
+        
+    
+        

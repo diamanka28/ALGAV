@@ -1,0 +1,16 @@
+'''
+Created on 27 nov. 2024
+
+@author: diamanka
+'''
+
+class PatriciaNode(object):
+    '''
+    cette classe représente le noeud de l'arbre de patricia
+    '''
+
+    def __init__(self, params):
+        '''
+        Constructor
+        '''
+        

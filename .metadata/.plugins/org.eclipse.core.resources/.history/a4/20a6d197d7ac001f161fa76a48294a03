@@ -1,0 +1,31 @@
+'''
+Created on 27 nov. 2024
+@author: diamanka
+'''
+
+def print_ascii():
+    """
+    Affiche tous les caractères ASCII avec leur code numérique (de 0 à 127).
+    """
+    print(f"{'Code':<5} {'Caractère':<10}")
+    print("-" * 20)
+    for i in range(128):
+        char = chr(i)
+        display_char = char if char.isprintable() else f"\\x{i:02x}"
+        print(f"{i:<5} {display_char:<10}")
+
+def is_ascii(s):
+    """
+    Vérifie si une chaîne est composée uniquement de caractères ASCII.
+    """
+    return all(0 <= ord(c) <= 127 for c in s)
+
+def finish_word(word, cara='\x00'):
+    """
+    Ajoute un caratèere à la fin d'un mot
+    """
+    return word + cara
+
+print(finish_word("diamanka",'\x02'))
+print(is_ascii("mamamdoué"))
+print(ord('c'))

@@ -1,2 +1,8 @@
 MODULES_MANAGER_V3
-test|/home/diamanka/git/ALGAV/algav1/src/test.py
+node.__init__|/home/diamanka/git/ALGAV/algav1/src/node/__init__.py
+node.patricia_node|/home/diamanka/git/ALGAV/algav1/src/node/patricia_node.py
+testPyDev.__init__|/home/diamanka/git/ALGAV/algav1/src/testPyDev/__init__.py
+testPyDev.test|/home/diamanka/git/ALGAV/algav1/src/testPyDev/test.py
+testPyDev.test1|/home/diamanka/git/ALGAV/algav1/src/testPyDev/test1.py
+utilitaire.__init__|/home/diamanka/git/ALGAV/algav1/src/utilitaire/__init__.py
+utilitaire.patricia_util|/home/diamanka/git/ALGAV/algav1/src/utilitaire/patricia_util.py

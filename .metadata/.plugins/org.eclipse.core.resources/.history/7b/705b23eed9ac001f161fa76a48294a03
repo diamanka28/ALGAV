@@ -1,0 +1,53 @@
+'''
+Created on 27 nov. 2024
+@author: diamanka
+'''
+
+def print_ascii():
+    """
+    Affiche tous les caractères ASCII avec leur code numérique (de 0 à 127).
+    """
+    print(f"{'Code':<5} {'Caractère':<10}")
+    print("-" * 20)
+    for i in range(128):
+        char = chr(i)
+        display_char = char if char.isprintable() else f"\\x{i:02x}"
+        print(f"{i:<5} {display_char:<10}")
+
+def is_ascii(s):
+    """
+    Vérifie si une chaîne est composée uniquement de caractères ASCII.
+    """
+    return all(0 <= ord(c) <= 127 for c in s)
+
+def finish_key(word, cara='\x00'):
+    """
+    Ajoute un caratèere à la fin d'un mot
+    """
+    return word + cara
+
+def not_key(word, marker='\x00'):
+    """
+    Supprime le caractère de fin de mot d'une chaîne.
+    """
+    return word.rstrip(marker)
+
+def is_key(word, marker='\x00'):
+    """
+    Vérifie si une chaîne contient le marqueur de fin de mot.
+    """
+    return word.endswith(marker)
+
+def longest_prefix(s1, s2):
+    """
+    Trouve le plus grand préfixe commun entre deux chaînes.
+    """
+    prefix = []
+    for c1, c2 in zip(s1, s2):
+        if c1 == c2:
+            prefix.append(c1)
+        else:
+            break
+    return ''.join(prefix)
+
+print(longest_prefix("leve", "lourd"))
