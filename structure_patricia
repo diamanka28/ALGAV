@@ -25,7 +25,7 @@ Structure d'un nœud Patricia
     Respect de l’ordre lexicographique :
         En suivant l’ordre ASCII pour organiser les frères et enfants, les Patricia-Tries deviennent naturellement triés, ce qui facilite les opérations comme l’énumération de mots dans l’ordre alphabétique.
 
-Concept d’un Arbre Patricia
+Concept d’un Arbre Patricia  
 
     Définition :
         Un arbre Patricia est un conteneur avec un seul attribut : un pointeur vers un nœud Patricia racine.

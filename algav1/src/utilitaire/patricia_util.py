@@ -93,6 +93,3 @@ def rest(chaine, sous_chaine):
         return chaine[len(sous_chaine):]
     return ""#caractere vide
 
-
-
-

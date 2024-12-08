@@ -4,5 +4,7 @@ node.patricia_node|/home/diamanka/git/ALGAV/algav1/src/node/patricia_node.py
 testPyDev.__init__|/home/diamanka/git/ALGAV/algav1/src/testPyDev/__init__.py
 testPyDev.test|/home/diamanka/git/ALGAV/algav1/src/testPyDev/test.py
 testPyDev.test1|/home/diamanka/git/ALGAV/algav1/src/testPyDev/test1.py
+tree.__init__|/home/diamanka/git/ALGAV/algav1/src/tree/__init__.py
+tree.patricia_tree|/home/diamanka/git/ALGAV/algav1/src/tree/patricia_tree.py
 utilitaire.__init__|/home/diamanka/git/ALGAV/algav1/src/utilitaire/__init__.py
 utilitaire.patricia_util|/home/diamanka/git/ALGAV/algav1/src/utilitaire/patricia_util.py

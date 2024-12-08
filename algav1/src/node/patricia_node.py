@@ -171,5 +171,41 @@ class PatriciaNode(object):
         # Si on atteint la fin, on ajoute à la fin des enfants
         prev.sibling = PatriciaNode(key)
     
-ma = PatriciaNode("Diamanka veut devenir un ing")
-ma.print_Node()
+    def delete_sibling(self, key):
+        """
+        Supprime une clé des frères immédiats du nœud. ces enfants ne sont pas conservés
+        """
+        if not self.sibling:
+            return
+        
+        current = self.sibling
+        prev = None
+        while current:
+            if current.key == key:  # Trouvé, on supprime
+                if prev:
+                    prev.sibling = current.sibling
+                else:
+                    self.sibling = current.sibling
+                return
+            prev = current
+            current = current.sibling
+
+    def delete_child(self, key):
+        """
+        Supprime une clé des enfants immédiats du nœud. ces enfants ne sont pas conservés 
+        """
+        if not self.child:
+            return
+        
+        current = self.child
+        prev = None
+        while current:
+            if current.key == key:  # Trouvé, on supprime
+                if prev:
+                    prev.sibling = current.sibling
+                else:
+                    self.child = current.sibling
+                return
+            prev = current
+            current = current.sibling
+            
