@@ -2,36 +2,10 @@
     "label": "",
     "is_end_of_word": false,
     "children": {
-        ",": {
-            "label": ",",
-            "is_end_of_word": true,
-            "children": {}
-        },
-        "?": {
-            "label": "?",
-            "is_end_of_word": true,
-            "children": {}
-        },
-        "A": {
-            "label": "A",
-            "is_end_of_word": true,
-            "children": {}
-        },
         "a": {
             "label": "a",
             "is_end_of_word": false,
-            "children": {
-                "\u0000": {
-                    "label": "",
-                    "is_end_of_word": true,
-                    "children": {}
-                },
-                "p": {
-                    "label": "ppel",
-                    "is_end_of_word": true,
-                    "children": {}
-                }
-            }
+            "children": {}
         },
         "c": {
             "label": "c",
@@ -39,11 +13,6 @@
             "children": {
                 "h": {
                     "label": "hacune",
-                    "is_end_of_word": true,
-                    "children": {}
-                },
-                "i": {
-                    "label": "i",
                     "is_end_of_word": true,
                     "children": {}
                 },
@@ -94,39 +63,17 @@
                     "label": "e",
                     "is_end_of_word": false,
                     "children": {
-                        "\u0000": {
-                            "label": "",
-                            "is_end_of_word": true,
-                            "children": {}
-                        },
                         "s": {
                             "label": "s",
                             "is_end_of_word": false,
-                            "children": {
-                                "\u0000": {
-                                    "label": "",
-                                    "is_end_of_word": true,
-                                    "children": {}
-                                },
-                                "s": {
-                                    "label": "sous",
-                                    "is_end_of_word": true,
-                                    "children": {}
-                                }
-                            }
+                            "children": {}
                         }
                     }
                 },
                 "u": {
                     "label": "u",
                     "is_end_of_word": false,
-                    "children": {
-                        "\u0000": {
-                            "label": "",
-                            "is_end_of_word": true,
-                            "children": {}
-                        }
-                    }
+                    "children": {}
                 }
             }
         },
@@ -170,13 +117,7 @@
         "l": {
             "label": "la",
             "is_end_of_word": false,
-            "children": {
-                "\u0000": {
-                    "label": "",
-                    "is_end_of_word": true,
-                    "children": {}
-                }
-            }
+            "children": {}
         },
         "m": {
             "label": "m",
@@ -203,11 +144,6 @@
             "label": "p",
             "is_end_of_word": false,
             "children": {
-                "a": {
-                    "label": "ar",
-                    "is_end_of_word": true,
-                    "children": {}
-                },
                 "h": {
                     "label": "hrase",
                     "is_end_of_word": true,
@@ -228,18 +164,7 @@
         "q": {
             "label": "que",
             "is_end_of_word": false,
-            "children": {
-                "\u0000": {
-                    "label": "",
-                    "is_end_of_word": true,
-                    "children": {}
-                },
-                "l": {
-                    "label": "l",
-                    "is_end_of_word": true,
-                    "children": {}
-                }
-            }
+            "children": {}
         },
         "r": {
             "label": "redevables",
@@ -277,11 +202,6 @@
                     "children": {}
                 }
             }
-        },
-        "u": {
-            "label": "un",
-            "is_end_of_word": true,
-            "children": {}
         }
     }
 }

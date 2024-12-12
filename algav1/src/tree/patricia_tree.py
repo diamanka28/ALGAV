@@ -4,6 +4,7 @@ Created on 27 nov. 2024
 '''
 from node.patricia_node import PatriciaNode
 from utilitaire.patricia_util import *
+from pip._internal.cli.cmdoptions import pre
 
 class PatriciaTree(object):
     '''
@@ -223,3 +224,116 @@ class PatriciaTree(object):
         
         # Si nous sortons de la boucle sans correspondance
         return False
+    
+    def ComptageMots(self):
+        """
+        Compte le nombre de mots dans le Patricia Tree.
+        """
+        def _count_words(node):
+            if not node:
+                return 0
+            count = 1 if node.is_key() else 0
+            count += _count_words(node.child)
+            count += _count_words(node.sibling)
+            return count
+    
+        return _count_words(self.root)
+    
+    def ListeMots(self):
+        """
+        Liste les mots du Patricia Tree dans l'ordre alphabétique.
+        """
+        def _list_words(node, prefix, result):
+            if not node:
+                return
+            current_word = prefix + not_key(node.key)
+            if node.is_key():
+                result.append(current_word)
+            _list_words(node.child, current_word, result)
+            _list_words(node.sibling, prefix, result)
+    
+        result = []
+        _list_words(self.root, "", result)
+        return result
+    
+    def ComptageNil(self):
+        """
+        Compte le nombre de pointeurs vers Nil dans le Patricia Tree.
+        """
+        def _count_nil(node):
+            if not node:
+                return 1
+            count = 0
+            count += _count_nil(node.child)
+            count += _count_nil(node.sibling)
+            return count
+    
+        return _count_nil(self.root)
+    
+    def Hauteur(self):
+        """
+        Calcule la hauteur du Patricia Tree.
+        """
+        def _height(node, ind = 1):
+            if not node:
+                return 0
+            if ind == 1:
+                return 1 + max(_height(node.child), _height(node.sibling,0))
+            else :
+                return max(_height(node.child), _height(node.sibling,0))
+    
+        return _height(self.root)
+
+    def Prefixe(self, mot):
+        """
+        Compte le nombre de mots dont le mot donné est un préfixe.
+        """
+        def _count_prefixed(node, prefix):
+            if not node:
+                return 0
+            # Vérifier si le prefix est dans ou englobe la clé
+            if is_prefix(prefix, node.key) or prefix == node.key:
+                # Compter les mots à partir de ce nœud
+                if node.is_key():
+                    return _count_words(node.child) + 1
+                else:
+                    return _count_words(node.child)
+            elif is_prefix(node.key, prefix):
+                return _count_prefixed(node.child, rest(prefix, node.key))
+            elif not longest_prefix(prefix, node.key) : # Continuer à chercher dans les frères
+                return _count_prefixed(node.sibling, prefix)
+           
+            return 0
+        def _count_words(node):# compter les les mots à partir d'un noeud
+            if not node:
+                return 0
+            count = 1 if node.is_key() else 0
+            count += _count_words(node.child)
+            count += _count_words(node.sibling)
+            return count
+    
+        return _count_prefixed(self.root.child, mot)
+
+    def ProfondeurMoyenne(self):
+        """
+        Calcule la profondeur moyenne des feuilles d'un Patricia Tree.
+        """
+        def _calculate_depth(node, current_depth, total_depth, leaf_count):
+            if not node:
+                return total_depth, leaf_count
+            # Si le nœud est une feuille
+            if node.is_key() and not node.child:
+                total_depth += current_depth
+                leaf_count += 1
+            # Récursion sur les enfants et les frères
+            total_depth, leaf_count = _calculate_depth(node.child, current_depth + 1, total_depth, leaf_count)
+            total_depth, leaf_count = _calculate_depth(node.sibling, current_depth, total_depth, leaf_count)
+    
+            return total_depth, leaf_count
+    
+        total_depth, leaf_count = _calculate_depth(self.root, 0, 0, 0)
+        # Si aucune feuille n'existe, la profondeur moyenne est 0
+        if leaf_count == 0:
+            return 0
+        # Retourner la profondeur moyenne arrondie à l'entier le plus proche
+        return round(total_depth / leaf_count)

@@ -106,3 +106,68 @@ def json_to_patricia(filename):
     tree.root = dict_to_node(dictionnaire)
     return tree
 
+def lesmots(tree, filename):
+    """
+    Liste les mots de l'arbre dans le fichier 'filename'.
+    """
+    if not isinstance(tree, PatriciaTree):
+        raise TypeError("L'objet doit être un arbre de Patricia.")
+    
+    try:
+        # Appeler la méthode ListeMots pour obtenir tous les mots
+        mots = tree.ListeMots()
+        
+        # Écrire les mots dans le fichier, un par ligne
+        with open(filename, "w") as f:
+            for mot in mots:
+                f.write(mot + "\n")
+        print(f"Les mots ont été écrits dans le fichier '{filename}'.")
+    
+    except FileNotFoundError:
+        print(f"Le fichier '{filename}' n'a pas été trouvé.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Une erreur s'est produite dans 'lesmots': {e}")
+        sys.exit(1)
+   
+def profond_moyenne(tree, filename):
+    """
+    calcule la profondeur moyenne des feuilles
+    """
+    if not isinstance(tree, PatriciaTree):
+        raise TypeError("L'objet doit être un arbre de Patricia.")
+    try:
+        moyy = tree.ProfondeurMoyenne()
+        
+        with open(filename, "w") as f:
+            f.write(str(moyy))
+        print(f"La profondeur moyenne des feuilles est écrite dans '{filename}'.")
+    except FileNotFoundError:
+        print(f"Le fichier '{filename}' n'a pas été trouvé.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Une erreur s'est produite dans 'lesmots': {e}")
+        sys.exit(1)
+    
+def prefixe(tree, filename, mot):
+    """
+    calcule la profondeur moyenne des feuilles
+    """
+    if not isinstance(tree, PatriciaTree):
+        raise TypeError("L'objet doit être un arbre de Patricia.")
+    try:
+        moyy = tree.Prefixe(mot)
+        
+        with open(filename, "w") as f:
+            f.write(str(moyy))
+        print(f"Les mots avec comme préfixe '{mot}' sont écrite dans '{filename}'.")
+    except FileNotFoundError:
+        print(f"Le fichier '{filename}' n'a pas été trouvé.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Une erreur s'est produite dans 'lesmots': {e}")
+        sys.exit(1)
+
+def fusion(treeA, treeB):
+    return treeA
+    
