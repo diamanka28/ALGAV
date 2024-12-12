@@ -1,0 +1,72 @@
+'''
+Created on 11 déc. 2024
+
+@author: diamanka
+
+tous les tests se font ici
+'''
+from tree.patricia_tree import *
+from _ast import Try
+from pip._vendor.pyparsing.util import line
+
+def ajout(tree, fichier):
+    """
+    Ajoute tous les mots d'un fichier dans l'arbre Patricia.
+    """
+    
+    if not isinstance(tree, PatriciaTree):
+        raise TypeError("L'objet 'tree' doit etre un arbre de Patricia.")
+        exit(1)
+    try:
+        with open(fichier, "r") as f:
+            #traiter ligne par ligne
+            for line in f:
+                
+                # diviser la ligne en mot 
+                mots = line.strip().split()
+                for mot in mots:
+                    tree.insertion(mot) # ajouter le mot dans l'arbre
+    except FileNotFoundError :
+        print(f"Le fichier '{fichier}' n'a pas été trouvé.")
+        exit(1)
+    except Exception as e:
+        print(f"Une erreur s'est produite : {e}")
+        exit(1)
+
+def supprime(tree, fichier):
+    """ supprime tous les mots du fichiers dans l'arbre
+    """
+    
+    if not isinstance(tree, PatriciaTree):
+        raise TypeError("L'objet 'tree' doit etre un arbre de patricia.")
+        exit(1)
+    try: 
+        with open(fichier, "r") as f:
+            for line in f:
+                mots = line.strip().split()
+                for mot in mots:
+                    if not tree.suppression(mot):
+                        print(mot + " non supprimé")
+    except FileNotFoundError:
+        print(f"Le fichier '{fichier}' n'a pas été trouvé.")
+        exit(1)
+    except Exception as e:
+        print(f"Une erreur s'est produite : {e}")
+        exit(1)
+
+
+
+
+tree = PatriciaTree()
+
+ajout(tree, "exemple de base")
+
+supprime(tree,"suppression.txt")
+
+tree.root.sibling.print_Node()
+
+print(tree.recherche(","))
+
+
+
+

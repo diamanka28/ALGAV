@@ -1,0 +1,42 @@
+'''
+Created on 11 déc. 2024
+
+@author: diamanka
+
+tous les tests se font ici
+'''
+from tree.patricia_tree import *
+from _ast import Try
+
+tree = PatriciaTree()
+tree.insertion("")
+tree.insertion("mamadou")
+tree.insertion("mamad")
+tree.insertion("lourds")
+tree.insertion("le")
+tree.insertion("lou")
+tree.insertion("luxe")
+tree.suppresion("lou")
+
+#tree.root.child.sibling.child.print_Node()
+print(tree.recherche("Luxe"))
+
+def ajout(tree, fichier):
+    """
+    Ajoute tous les mots d'un fichier dans l'arbre Patricia.
+    """
+    try:
+        with open(fichier, "r") in f:
+            #traiter ligne par ligne
+            for line in f:
+                
+                # diviser la ligne en mot 
+                mots = line.strip().split()
+                for mot in mots:
+                    tree.insertion(mot) # ajouter le mot dans l'arbre
+    except FileNotFoundError :
+        print(f"Le fichier '{fichier}' n'a pas été trouvé.")
+    except Exception as e:
+        print(f"Une erreur s'est produite : {e}")
+        
+

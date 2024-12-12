@@ -1,0 +1,22 @@
+'''
+Created on 11 déc. 2024
+
+@author: diamanka
+
+tous les tests se font ici
+'''
+from tree.patricia_tree import *
+
+tree = PatriciaTree()
+tree.insertion("")
+tree.insertion("mamadou")
+tree.insertion("mamad")
+tree.insertion("lourds")
+tree.insertion("le")
+tree.insertion("lou")
+tree.insertion("luxe")
+tree.suppresion("lou")
+
+#tree.root.child.sibling.child.print_Node()
+print(tree.recherche("Luxe"))
+

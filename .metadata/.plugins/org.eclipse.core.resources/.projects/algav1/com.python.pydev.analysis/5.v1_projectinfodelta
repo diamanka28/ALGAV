@@ -1,1 +1,11 @@
-DELSTRtree.patricia_tree
+INSTUPrendu.manipTree
+/home/diamanka/git/ALGAV/algav1/src/rendu/manipTree.py
+INFOS:&&2|1|2|0|3|11|5&&2|4|2|0|3|30|5&&2|5|2|0|3|50|5&&2|6|2|0|3|71|5&&2|7|2|0|3|80|5&&2|8|2|0|3|97|5
+dict_to_node=7
+/home/diamanka/git/ALGAV/algav1/src/rendu/manipTree.py=3
+node_to_dict=5
+rendu.manipTree=2
+json_to_patricia=8
+ajout=1
+supprime=4
+patricia_to_json=6

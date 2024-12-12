@@ -1,0 +1,29 @@
+'''
+Created on 12 déc. 2024
+
+@author: diamanka
+'''
+
+import argparse
+from rendu.manipTree import *
+
+if __name__ == "__main__":
+    """
+    la ligne de commande 
+    """
+    parser = argparse.ArgumentParser(description="Gestion des arbres Patricia.")
+    parser.add_argument("action",nargs="?", choices=["ajout", "supprime", "export", "import", "search"], help="Action à effectuer ")
+    parser.add_argument("structure", nargs="?", choices=["0", "1"], help="PATRICIA TRI ou HYBRIDE")
+    parser.add_argument("fichier", nargs="?", help="Nom du fichier à utiliser pour l'action.")
+
+    args = parser.parse_args()
+    if len(sys.argv) <= 3:# le nombre d'argument 
+        print("Usage : python3 rendu.py <action> <structure> <fichier> ")
+        sys.exit(1)
+    else : # à faire selon l'action choisie
+        print("Welcome")
+        tree = PatriciaTree()
+        ajout(tree, "exemple de base")
+        tree.root.child.print_Node()
+
+    
