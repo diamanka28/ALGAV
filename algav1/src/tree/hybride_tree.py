@@ -101,29 +101,97 @@ class HybridTrie:
             compteur += self.comptage_mots(a.get_sup())
         return compteur
 
-    # Affiche le trie en une chaîne de caractères
-    def __str__(self):
-        result = f"{self.caractere}, {self.valeur}\n"
-        if self.inf is not None and self.inf.caractere != ' ':
-            result += f"inf: {self.inf}"
-        if self.eq is not None and self.eq.caractere != ' ':
-            result += f"eq: {self.eq}"
-        if self.sup is not None and self.sup.caractere != ' ':
-            result += f"sup: {self.sup}"
-        return result
-
-    def afficher_trie(self, niveau=0, branche=""):
+    # Liste des mots dans l'ordre alphabétique
+    def liste_mots(self, prefixe=""):
+        mots = []
+        if self.inf:
+            mots.extend(self.inf.liste_mots(prefixe))
         if self.caractere != ' ':
-            print(f"{' ' * niveau}{branche}── {self.caractere} ({self.valeur})")
-    
-        # Affiche le sous-arbre inf (caractères inférieurs)
-        if self.inf is not None:
-            self.inf.afficher_trie(niveau + 1, "inf")
-        
-        # Affiche le sous-arbre eq (caractères égaux)
-        if self.eq is not None:
-            self.eq.afficher_trie(niveau + 1, "eq ")
-        
-        # Affiche le sous-arbre sup (caractères supérieurs)
-        if self.sup is not None:
-            self.sup.afficher_trie(niveau + 1, "sup")
+            if self.valeur:
+                mots.append(prefixe + self.caractere)
+            if self.eq:
+                mots.extend(self.eq.liste_mots(prefixe + self.caractere))
+        if self.sup:
+            mots.extend(self.sup.liste_mots(prefixe))
+        return mots
+
+    # Compte les pointeurs vers Nil (None)
+    def comptage_nil(self):
+        compteur = 0
+        if self.inf is None:
+            compteur += 1
+        else:
+            compteur += self.inf.comptage_nil()
+        if self.eq is None:
+            compteur += 1
+        else:
+            compteur += self.eq.comptage_nil()
+        if self.sup is None:
+            compteur += 1
+        else:
+            compteur += self.sup.comptage_nil()
+        return compteur
+
+    # Calcule la hauteur de l'arbre
+    def hauteur(self):
+        if self is None:
+            return 0
+        hauteur_inf = self.inf.hauteur() if self.inf else 0
+        hauteur_eq = self.eq.hauteur() if self.eq else 0
+        hauteur_sup = self.sup.hauteur() if self.sup else 0
+        return 1 + max(hauteur_inf, hauteur_eq, hauteur_sup)
+
+    # Calcule la profondeur moyenne des feuilles de l'arbre
+    def profondeur_moyenne(self, profondeur=0):
+        if self is None:
+            return 0, 0
+        if not self.inf and not self.eq and not self.sup:
+            return profondeur, 1
+        total_profondeur = 0
+        total_feuilles = 0
+        if self.inf:
+            p, f = self.inf.profondeur_moyenne(profondeur + 1)
+            total_profondeur += p
+            total_feuilles += f
+        if self.eq:
+            p, f = self.eq.profondeur_moyenne(profondeur + 1)
+            total_profondeur += p
+            total_feuilles += f
+        if self.sup:
+            p, f = self.sup.profondeur_moyenne(profondeur + 1)
+            total_profondeur += p
+            total_feuilles += f
+        return total_profondeur, total_feuilles
+
+    def profondeur_moyenne_arbre(self):
+        total_profondeur, total_feuilles = self.profondeur_moyenne()
+        return total_profondeur // total_feuilles if total_feuilles != 0 else 0
+
+    # Compte combien de mots du dictionnaire ont le mot "prefixe"
+    def prefixe(self, mot):
+        compteur = 0
+        if self.caractere != ' ':
+            if mot == "":
+                if self.valeur:
+                    compteur += 1
+                if self.eq:
+                    compteur += self.eq.comptage_mots(self.eq)
+            elif self.caractere == mot[0]:
+                if self.eq:
+                    compteur += self.eq.prefixe(mot[1:])
+        if self.inf:
+            compteur += self.inf.prefixe(mot)
+        if self.sup:
+            compteur += self.sup.prefixe(mot)
+        return compteur
+
+    # Supprime un mot du trie
+    def suppression(self, mot):
+        if not mot:
+            self.valeur = ""
+        elif mot[0] < self.caractere and self.inf:
+            self.inf.suppression(mot)
+        elif mot[0] > self.caractere and self.sup:
+            self.sup.suppression(mot)
+        elif mot[0] == self.caractere and self.eq:
+            self.eq.suppression(mot[1:])
