@@ -2,7 +2,7 @@
 Created on 12 déc. 2024
 
 @author: diamanka
-@author :  omar
+@author :  omar rezkellah
 '''
 
 import argparse
