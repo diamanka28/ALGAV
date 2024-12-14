@@ -19,9 +19,6 @@ class Hybrid_Node:
         :param eq: Le sous-arbre des caractères égaux.
         :param sup: Le sous-arbre des caractères supérieurs.
         """
-        if not (0 <= ord(caractere) <= 127):
-            raise ValueError("La clé doit contenir uniquement des caractères ASCII.")
-        
         self.caractere = caractere
         self.valeur = valeur
         self.inf = inf

@@ -1,7 +1,6 @@
 '''
 Created on 27 nov. 2024
 @author: diamanka
-@author: omar
 '''
 from utilitaire.patricia_util import *
 
