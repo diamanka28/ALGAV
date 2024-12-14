@@ -2,6 +2,7 @@
 Created on 13 déc. 2024
 
 @author: omar
+@author: diamanka
 '''
 
 class HybridTrie:
