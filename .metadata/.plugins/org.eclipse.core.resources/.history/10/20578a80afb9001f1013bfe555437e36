@@ -1,0 +1,142 @@
+'''
+Created on 13 déc. 2024
+
+@author: omar
+'''
+
+class HybridTrie:
+
+    def __init__(self, caractere=' ', valeur='', inf=None, eq=None, sup=None):
+        self.caractere = caractere
+        self.valeur = valeur
+        self.inf = inf
+        self.eq = eq
+        self.sup = sup
+
+    # Getter et Setter pour caractere
+    def get_caractere(self):
+        return self.caractere
+
+    def set_caractere(self, c):
+        self.caractere = c
+
+    # Getter et Setter pour valeur
+    def get_valeur(self):
+        return self.valeur
+
+    def set_valeur(self, valeur):
+        self.valeur = valeur
+
+    # Getter et Setter pour inf
+    def get_inf(self):
+        return self.inf
+
+    def set_inf(self, inf):
+        self.inf = inf
+
+    # Getter et Setter pour eq
+    def get_eq(self):
+        return self.eq
+
+    def set_eq(self, eq):
+        self.eq = eq
+
+    # Getter et Setter pour sup
+    def get_sup(self):
+        return self.sup
+
+    def set_sup(self, sup):
+        self.sup = sup
+
+    # Vérifie si le trie est vide
+    def est_vide(self, a):
+        if a is None:
+            return True
+        return a.get_caractere() == ' ' and a.get_valeur() == '' and a.get_inf() is None and a.get_eq() is None and a.get_sup() is None
+
+    # Ajoute une clé avec une valeur au trie hybride
+    def ajout_cle(self, cle, a, v):
+        if self.est_vide(a):
+            if len(cle) == 1:
+                return HybridTrie(cle[0], v)
+            else:
+                a.eq = HybridTrie()
+                return HybridTrie(cle[0], "", HybridTrie(), self.ajout_cle(cle[1:], a.eq, v), HybridTrie())
+        else:
+            p = cle[0]
+            if p < a.get_caractere():
+                a.inf = HybridTrie()
+                return HybridTrie(a.get_caractere(), a.get_valeur(), self.ajout_cle(cle, a.inf, v), a.get_eq(), a.get_sup())
+            elif p > a.get_caractere():
+                a.sup = HybridTrie()
+                return HybridTrie(a.get_caractere(), a.get_valeur(), a.get_inf(), a.get_eq(), self.ajout_cle(cle, a.sup, v))
+            a.eq = HybridTrie()
+            return HybridTrie(a.get_caractere(), a.get_valeur(), a.get_inf(), self.ajout_cle(cle[1:], a.eq, v), a.get_sup())
+
+    # Recherche si un mot est présent dans le trie
+    def recherche(self, a, mot):
+        if self.est_vide(a):
+            return False
+        if len(mot) == 1:
+            return mot[0] == a.get_caractere() and a.get_valeur() != ""
+        else:
+            p = mot[0]
+            if p < a.get_caractere():
+                return self.recherche(a.get_inf(), mot)
+            elif p > a.get_caractere():
+                return self.recherche(a.get_sup(), mot)
+            return self.recherche(a.get_eq(), mot[1:])
+
+    # Compte le nombre de mots dans le trie hybride
+    def comptage_mots(self, a):
+        compteur = 0
+        if a.get_valeur() != "":
+            compteur += 1
+        if a.get_inf() is not None:
+            compteur += self.comptage_mots(a.get_inf())
+        if a.get_eq() is not None:
+            compteur += self.comptage_mots(a.get_eq())
+        if a.get_sup() is not None:
+            compteur += self.comptage_mots(a.get_sup())
+        return compteur
+
+    # Affiche le trie en une chaîne de caractères
+    def __str__(self):
+        result = f"{self.caractere}, {self.valeur}\n"
+        if self.inf is not None and self.inf.caractere != ' ':
+            result += f"inf: {self.inf}"
+        if self.eq is not None and self.eq.caractere != ' ':
+            result += f"eq: {self.eq}"
+        if self.sup is not None and self.sup.caractere != ' ':
+            result += f"sup: {self.sup}"
+        return result
+
+    def afficher_trie(self, niveau=0, branche=""):
+        if self.caractere != ' ':
+            print(f"{' ' * niveau}{branche}── {self.caractere} ({self.valeur})")
+    
+        # Affiche le sous-arbre inf (caractères inférieurs)
+        if self.inf is not None:
+            self.inf.afficher_trie(niveau + 1, "inf")
+        
+        # Affiche le sous-arbre eq (caractères égaux)
+        if self.eq is not None:
+            self.eq.afficher_trie(niveau + 1, "eq ")
+        
+        # Affiche le sous-arbre sup (caractères supérieurs)
+        if self.sup is not None:
+            self.sup.afficher_trie(niveau + 1, "sup")
+
+
+# Exemple d'utilisation
+"""if __name__ == "__main__":
+    test = HybridTrie()
+    test = test.ajout_cle("ma", test, "23")
+    test.afficher_trie()
+    test = test.ajout_cle("maman", test, "1")
+    test.afficher_trie()
+    test = test.ajout_cle("manger", test, "6")
+    test.afficher_trie()
+    print(test.recherche(test, "dans"))
+    print(test.comptage_mots(test)) 
+"""

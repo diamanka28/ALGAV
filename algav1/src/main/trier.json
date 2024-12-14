@@ -1,0 +1,96 @@
+{
+    "label": "",
+    "is_end_of_word": false,
+    "children": {
+        "d": {
+            "label": "d",
+            "is_end_of_word": false,
+            "children": {
+                "a": {
+                    "label": "akar",
+                    "is_end_of_word": true,
+                    "children": {}
+                },
+                "i": {
+                    "label": "iamanka",
+                    "is_end_of_word": true,
+                    "children": {}
+                },
+                "o": {
+                    "label": "ors",
+                    "is_end_of_word": true,
+                    "children": {}
+                },
+                "u": {
+                    "label": "u",
+                    "is_end_of_word": true,
+                    "children": {}
+                }
+            }
+        },
+        "j": {
+            "label": "je",
+            "is_end_of_word": true,
+            "children": {}
+        },
+        "m": {
+            "label": "m",
+            "is_end_of_word": false,
+            "children": {
+                "a": {
+                    "label": "amadou",
+                    "is_end_of_word": true,
+                    "children": {}
+                },
+                "i": {
+                    "label": "inquite",
+                    "is_end_of_word": true,
+                    "children": {}
+                }
+            }
+        },
+        "n": {
+            "label": "ne",
+            "is_end_of_word": false,
+            "children": {
+                "\u0000": {
+                    "label": "",
+                    "is_end_of_word": true,
+                    "children": {}
+                }
+            }
+        },
+        "p": {
+            "label": "p",
+            "is_end_of_word": false,
+            "children": {
+                "a": {
+                    "label": "as",
+                    "is_end_of_word": false,
+                    "children": {
+                        "\u0000": {
+                            "label": "",
+                            "is_end_of_word": true,
+                            "children": {}
+                        }
+                    }
+                },
+                "r": {
+                    "label": "resent",
+                    "is_end_of_word": true,
+                    "children": {}
+                }
+            }
+        },
+        "s": {
+            "label": "sera",
+            "is_end_of_word": true,
+            "children": {}
+        },
+        "t": {
+            "label": "tout",
+            "is_end_of_word": true,
+            "children": {}
+        }
+    }
+}

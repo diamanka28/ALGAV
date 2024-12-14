@@ -1,0 +1,126 @@
+import tkinter as tk
+from tkinter import messagebox
+from tree.hybride_tree import *
+
+class HybridTrie:
+
+    def __init__(self, caractere=' ', valeur='', inf=None, eq=None, sup=None):
+        self.caractere = caractere
+        self.valeur = valeur
+        self.inf = inf
+        self.eq = eq
+        self.sup = sup
+
+    def est_vide(self, a):
+        return a is None or (a.caractere == ' ' and a.valeur == '' and a.inf is None and a.eq is None and a.sup is None)
+
+    def ajout(self, cle, a, v):
+        if self.est_vide(a):
+            if len(cle) == 1:
+                return HybridTrie(cle[0], v)
+            else:
+                a = HybridTrie(cle[0], "")
+                a.eq = self.ajout(cle[1:], a.eq, v)
+                return a
+        else:
+            p = cle[0]
+            if p < a.caractere:
+                a.inf = self.ajout(cle, a.inf, v)
+            elif p > a.caractere:
+                a.sup = self.ajout(cle, a.sup, v)
+            else:
+                if len(cle) == 1:
+                    a.valeur = v
+                else:
+                    a.eq = self.ajout(cle[1:], a.eq, v)
+            return a
+
+    def recherche(self, a, mot):
+        if self.est_vide(a):
+            return False
+        if len(mot) == 1:
+            return mot[0] == a.caractere and a.valeur != ""
+        else:
+            p = mot[0]
+            if p < a.caractere:
+                return self.recherche(a.inf, mot)
+            elif p > a.caractere:
+                return self.recherche(a.sup, mot)
+            return self.recherche(a.eq, mot[1:])
+
+    def afficher_trie(self, niveau=0, prefixe=""):
+        if self.caractere != ' ':
+            print(" " * niveau + f"{prefixe}{self.caractere} ({self.valeur})")
+        if self.inf is not None:
+            self.inf.afficher_trie(niveau + 1, "inf: ")
+        if self.eq is not None:
+            self.eq.afficher_trie(niveau + 1, "eq: ")
+        if self.sup is not None:
+            self.sup.afficher_trie(niveau + 1, "sup: ")
+
+# Interface graphique Tkinter
+class HybridTrieApp:
+
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Gestion de HybridTrie")
+
+        self.trie = HybridTrie()
+
+        # Entrée pour le mot
+        tk.Label(root, text="Mot :").grid(row=0, column=0, padx=10, pady=10)
+        self.mot_entry = tk.Entry(root)
+        self.mot_entry.grid(row=0, column=1, padx=10, pady=10)
+
+        # Entrée pour la valeur
+        tk.Label(root, text="Valeur :").grid(row=1, column=0, padx=10, pady=10)
+        self.valeur_entry = tk.Entry(root)
+        self.valeur_entry.grid(row=1, column=1, padx=10, pady=10)
+
+        # Bouton pour ajouter un mot
+        self.ajouter_button = tk.Button(root, text="Ajouter", command=self.ajouter_mot)
+        self.ajouter_button.grid(row=2, column=0, columnspan=2, pady=10)
+
+        # Entrée pour la recherche
+        tk.Label(root, text="Rechercher un mot :").grid(row=3, column=0, padx=10, pady=10)
+        self.recherche_entry = tk.Entry(root)
+        self.recherche_entry.grid(row=3, column=1, padx=10, pady=10)
+
+        # Bouton pour rechercher un mot
+        self.recherche_button = tk.Button(root, text="Rechercher", command=self.rechercher_mot)
+        self.recherche_button.grid(row=4, column=0, columnspan=2, pady=10)
+
+        # Bouton pour afficher le trie
+        self.afficher_button = tk.Button(root, text="Afficher Trie", command=self.afficher_trie)
+        self.afficher_button.grid(row=5, column=0, columnspan=2, pady=10)
+
+    def ajouter_mot(self):
+        mot = self.mot_entry.get()
+        valeur = self.valeur_entry.get()
+        if mot and valeur:
+            self.trie = self.trie.ajout(mot, self.trie, valeur)
+            messagebox.showinfo("Succès", f"Le mot '{mot}' avec la valeur '{valeur}' a été ajouté.")
+        else:
+            messagebox.showerror("Erreur", "Veuillez entrer un mot et une valeur.")
+
+    def rechercher_mot(self):
+        mot = self.recherche_entry.get()
+        if mot:
+            trouve = self.trie.recherche(self.trie, mot)
+            if trouve:
+                messagebox.showinfo("Résultat", f"Le mot '{mot}' existe dans le trie.")
+            else:
+                messagebox.showinfo("Résultat", f"Le mot '{mot}' n'existe pas dans le trie.")
+        else:
+            messagebox.showerror("Erreur", "Veuillez entrer un mot à rechercher.")
+
+    def afficher_trie(self):
+        print("État actuel du HybridTrie :")
+        self.trie.afficher_trie()
+        print("-" * 40)
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = HybridTrieApp(root)
+    root.mainloop()
+    

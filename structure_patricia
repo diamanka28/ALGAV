@@ -34,3 +34,22 @@ Concept d’un Arbre Patricia
     Avantages :
         Cette conception simplifie la gestion de l’arbre, car toutes les opérations (insertion, recherche, suppression) sont initiées à partir de la racine.
         Les règles de navigation (via les enfants et frères) sont gérées uniquement par les nœuds Patricia, respectant ainsi le principe d’encapsulation.
+        
+
+La fusion de deux Patricia tries:
+   Cas particuliers :
+        Si l’un des deux arbres est vide, la fusion revient à retourner l’autre arbre.
+        Les mots communs aux deux arbres doivent être fusionnés (pas de doublons).
+   Points Clés :
+       >Maintenir les propriétés du Patricia-Trie.
+       >Choisir l'Arbre de Base :
+    	critère spécifique est nécessaire (comme le nombre de mots, la profondeur), choisissez l'arbre correspondant :
+        le critère choisit dans ce projet est basé sur le <<nombre de mot>> 
+        	Minimise les insertions
+        	Ne considère pas l'équilibre
+      >>Lister les Mots du Deuxième Arbre :
+    	Parcourez le deuxième arbre pour obtenir tous ses mots.
+      >>Insérer les Mots dans l'Arbre de Base :
+   	Insérez récursivement chaque mot dans l'arbre de base.
+       
+

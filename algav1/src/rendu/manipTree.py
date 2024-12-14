@@ -169,5 +169,23 @@ def prefixe(tree, filename, mot):
         sys.exit(1)
 
 def fusion(treeA, treeB):
-    return treeA
+    """
+    fusionne deux arbres de patricia dont l'un d'entre eux est le résultant
+    """
+    if not isinstance(treeA, PatriciaTree) or not isinstance(treeB, PatriciaTree):
+        raise TypeError("fusion : les deux objets doivent etre des patricia")
+    
+    if treeA.root.child.is_empty() or treeB.root.child.is_empty():
+        return treeA if not treeA.child.is_empty() else treeB
+    
+    """criteres de choix du resultant entre treeA et treeB"""
+    # le nombre de mots
+    retour = treeA if len(treeA.ListeMots()) >= len(treeB.ListeMots()) else treeB
+    """ lister les mots de l'autre arbre"""
+    mots = treeA.ListeMots() if len(treeA.ListeMots()) < len(treeB.ListeMots()) else treeB.ListeMots()
+    
+    for mot in mots :
+        retour.insertion(mot)
+        
+    return retour
     
