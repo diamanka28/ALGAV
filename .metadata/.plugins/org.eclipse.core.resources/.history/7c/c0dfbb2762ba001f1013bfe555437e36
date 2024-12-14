@@ -21,7 +21,6 @@ class Hybrid_Node:
         """
         if not (0 <= ord(caractere) <= 127):
             raise ValueError("La clé doit contenir uniquement des caractères ASCII.")
-        
         self.caractere = caractere
         self.valeur = valeur
         self.inf = inf

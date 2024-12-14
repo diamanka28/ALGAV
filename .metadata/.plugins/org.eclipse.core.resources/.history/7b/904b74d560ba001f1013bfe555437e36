@@ -2,7 +2,9 @@
 Created on 27 nov. 2024
 @author: diamanka
 '''
-from node.patricia_node import *
+from node.patricia_node import PatriciaNode
+from utilitaire.patricia_util import *
+from pip._internal.cli.cmdoptions import pre
 
 class PatriciaTree(object):
     '''
