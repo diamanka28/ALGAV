@@ -1,0 +1,91 @@
+'''
+Created on 12 déc. 2024
+
+@author: diamanka
+'''
+
+import argparse
+from rendu.manipTree import *
+import shutil
+columns, _ = shutil.get_terminal_size()
+print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>".center(columns))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Gestion des arbres Patricia.")
+    parser.add_argument("action", nargs="?", choices=["inserer", "suppression", "listeMots", 
+                                                      "profondeurMoyenne", "prefixe", "fusion"], 
+                                                      help="Action à effectuer.")
+    parser.add_argument("structure", nargs="?", choices=["0", "1"], help="0 pour Patricia Trie, 1 pour Hybride Trie.")
+    parser.add_argument("fichier", nargs="?", help="Nom du fichier d'entrée principal.")
+    parser.add_argument("prefix", nargs="?", help="Nom du fichier ou préfixe selon l'action.")
+    parser.add_argument("--output", nargs="?", help="Nom du fichier de sortie (optionnel).")
+
+    args = parser.parse_args()
+
+    # Vérification du nombre d'arguments
+    if not args.action or not args.structure:
+        print("Usage : python3 rendu.py <action> <structure> <fichier> [<prefix>] [--output <fichier_sortie>]")
+        sys.exit(1)
+
+    if args.structure:  # Patricia ou Hybride
+        if args.structure == "0":  # Patricia-Trie
+            tree = PatriciaTree()
+
+            if args.action == "inserer":
+                if not args.fichier:
+                    print("Veuillez spécifier le fichier contenant les mots à insérer.")
+                    sys.exit(1)
+                ajout(tree, args.fichier)
+                output_file = args.output if args.output else "trie.json"
+                patricia_to_json(tree, output_file)
+
+            elif args.action == "suppression":
+                if not args.fichier:
+                    print("Veuillez spécifier le fichier contenant les mots à supprimer.")
+                    sys.exit(1)
+                tree = json_to_patricia("trie.json")
+                supprime(tree, args.fichier)
+                patricia_to_json(tree, "trie.json")
+
+            elif args.action == "listeMots":
+                if not args.fichier:
+                    print("Veuillez spécifier le fichier JSON de l'arbre.")
+                    sys.exit(1)
+                tree = json_to_patricia(args.fichier)
+                output_file = args.output if args.output else "mots.txt"
+                lesmots(tree, output_file)
+
+            elif args.action == "profondeurMoyenne":
+                if not args.fichier:
+                    print("Veuillez spécifier le fichier JSON de l'arbre.")
+                    sys.exit(1)
+                tree = json_to_patricia(args.fichier)
+                output_file = args.output if args.output else "profondeur.txt"
+                profond_moyenne(tree, output_file)
+
+            elif args.action == "prefixe":
+                if not args.fichier or not args.prefix:
+                    print("Veuillez spécifier le fichier JSON de l'arbre et le préfixe.")
+                    sys.exit(1)
+                tree = json_to_patricia(args.fichier)
+                output_file = args.output if args.output else "prefixe.txt"
+                prefixe(tree, output_file, args.prefix)
+
+            elif args.action == "fusion":
+                if not args.fichier or not args.prefix:
+                    print("Veuillez spécifier les deux fichiers JSON pour la fusion.")
+                    sys.exit(1)
+                treeA = json_to_patricia(args.fichier)
+                treeB = json_to_patricia(args.prefix)
+                tree = fusion(treeA, treeB)
+                output_file = args.output if args.output else "fusion.json"
+                patricia_to_json(tree, output_file)
+
+            else:
+                print("Action inconnue pour Patricia Trie.")
+
+        else:  # Hybride-Trie
+            print("La gestion des arbres hybrides n'est pas encore implémentée.")
+    else:
+        print("Veuillez spécifier une structure (0 pour Patricia, 1 pour Hybride).")

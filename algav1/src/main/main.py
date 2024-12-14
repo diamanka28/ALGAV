@@ -6,6 +6,10 @@ Created on 12 déc. 2024
 
 import argparse
 from rendu.manipTree import *
+import shutil
+columns, _ = shutil.get_terminal_size()
+print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>".center(columns))
+
 
 if __name__ == "__main__":
     """
@@ -20,12 +24,13 @@ if __name__ == "__main__":
     parser.add_argument("prefix", nargs="?", help="le prefix à rechercher.")
 
     args = parser.parse_args()
-    if len(sys.argv) <= 3:# le nombre d'argument 
-        print("Usage : python3 rendu.py <action> <structure> <fichier> ")
+    if not args.action or not args.structure:
+        print("Usage : python3 rendu.py <action> <structure> <fichier> [<prefix>] [--output <fichier_sortie>]")
         sys.exit(1)
+
     else : # à faire selon l'action choisie
-        print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>")
-        """logique code d'abord selon la structure et ensuite l'action
+        """print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>")
+        logique code d'abord selon la structure et ensuite l'action
         """
         if args.structure :# patricia ou hybride
             """Partie PATRICIA"""
@@ -66,6 +71,14 @@ if __name__ == "__main__":
                         sys.exit(1)
                     tree = json_to_patricia(args.fichier)
                     prefixe(tree, "prefixe.txt", args.prefix)
+                elif args.action == "fusion":
+                    if not args.fichier or not args.prefix:
+                        print("Il faut les deux fichiers pour la FUSION")
+                        sys.exit(1)
+                    treeA = json_to_patricia(args.fichier)
+                    treeB = json_to_patricia(args.prefix)
+                    tree = fusion(treeA, treeB)
+                    patricia_to_json(tree, "pat.json")
                 else: 
                     print("Action inconnue")
                 #tree.root.child.print_Node()
