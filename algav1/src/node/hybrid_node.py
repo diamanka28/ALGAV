@@ -4,3 +4,118 @@ Created on 14 dec. 2024
 @author: omar
 '''
 
+class Hybrid_Node:
+    """
+    Cette classe représente un nœud du trie hybride.
+    """
+
+    def __init__(self, caractere='', valeur='', inf=None, eq=None, sup=None):
+        """
+        Constructeur du nœud hybride.
+
+        :param caractere: Le caractère contenu dans le nœud.
+        :param valeur: La valeur associée si le nœud marque la fin d'un mot.
+        :param inf: Le sous-arbre des caractères inférieurs.
+        :param eq: Le sous-arbre des caractères égaux.
+        :param sup: Le sous-arbre des caractères supérieurs.
+        """
+        self.caractere = caractere
+        self.valeur = valeur
+        self.inf = inf
+        self.eq = eq
+        self.sup = sup
+
+    # Getters et Setters
+    def get_caractere(self):
+        return self.caractere
+
+    def set_caractere(self, caractere):
+        self.caractere = caractere
+
+    def get_valeur(self):
+        return self.valeur
+
+    def set_valeur(self, valeur):
+        self.valeur = valeur
+
+    def get_inf(self):
+        return self.inf
+
+    def set_inf(self, inf):
+        self.inf = inf
+
+    def get_eq(self):
+        return self.eq
+
+    def set_eq(self, eq):
+        self.eq = eq
+
+    def get_sup(self):
+        return self.sup
+
+    def set_sup(self, sup):
+        self.sup = sup
+
+    # Méthodes utilitaires
+    def is_key(self):
+        """
+        Vérifie si ce nœud représente une clé complète (fin de mot).
+        """
+        return self.valeur != ''
+
+    def make_key(self, valeur):
+        """
+        Marque le nœud comme une clé complète en lui associant une valeur.
+        """
+        self.valeur = valeur
+
+    def is_empty(self):
+        """
+        Vérifie si le nœud est vide.
+        """
+        return self.caractere == '' and not self.valeur and not self.inf and not self.eq and not self.sup
+
+    # Méthode pour afficher le nœud
+    def print_node(self):
+        """
+        Affiche le contenu du nœud.
+        """
+        print(f"Caractère: {self.caractere}, Valeur: {self.valeur}")
+        if self.inf:
+            print(f"  Inf: {self.inf.caractere}")
+        if self.eq:
+            print(f"  Eq: {self.eq.caractere}")
+        if self.sup:
+            print(f"  Sup: {self.sup.caractere}")
+
+    # Méthode pour ajouter un nœud frère (inférieur ou supérieur)
+    def put_sibling(self, caractere, valeur=''):
+        """
+        Insère un nœud frère immédiatement inférieur ou supérieur.
+
+        :param caractere: Le caractère du frère à ajouter.
+        :param valeur: La valeur associée au frère si nécessaire.
+        """
+        if caractere < self.caractere:
+            if not self.inf:
+                self.inf = Hybrid_Node(caractere, valeur)
+            else:
+                self.inf.put_sibling(caractere, valeur)
+        elif caractere > self.caractere:
+            if not self.sup:
+                self.sup = Hybrid_Node(caractere, valeur)
+            else:
+                self.sup.put_sibling(caractere, valeur)
+
+    # Méthode pour ajouter un nœud enfant (caractère égal)
+    def put_child(self, caractere, valeur=''):
+        """
+        Insère un nœud enfant (caractère égal).
+
+        :param caractere: Le caractère de l'enfant à ajouter.
+        :param valeur: La valeur associée à l'enfant si nécessaire.
+        """
+        if not self.eq:
+            self.eq = Hybrid_Node(caractere, valeur)
+        else:
+            self.eq.put_child(caractere, valeur)
