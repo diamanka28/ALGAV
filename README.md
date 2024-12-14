@@ -14,6 +14,7 @@ programmation en algorithme avancé : python
 
 ## execution 
     acceder au répertoire main du projet ensuite exécuter les commandes suivantes:
-### export PYTHONPATH=$PYTHONPATH:/home/diamanka/git/ALGAV/algav1/src
+### export PYTHONPATH=$PYTHONPATH:/home/diamanka/git/ALGAV/algav1/src  pour LINUX
+### set PYTHONPATH=%PYTHONPATH%;"C:\Users\rezke\ALGAV\algav1\src"   pour Windows 
 ### python3 main.py <action> <structure> <arbre ou fichier> [motif]
 
