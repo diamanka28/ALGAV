@@ -1,4 +1,4 @@
-from test import *
+from node.hybrid_node import *
 
 class HybrideTree:
     """
