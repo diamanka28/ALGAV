@@ -1,0 +1,10 @@
+'''
+Created on 14 déc. 2024
+
+@author: diamanka
+@author: omar
+'''
+from tree.hybride_tree  import *
+def inserer(tree, fichier):
+    """Insérer successivement les mots du fichier dans l'arbre"""
+    

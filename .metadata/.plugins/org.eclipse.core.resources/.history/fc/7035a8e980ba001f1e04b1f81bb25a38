@@ -1,0 +1,28 @@
+'''
+Created on 14 déc. 2024
+
+@author: diamanka
+@author: omar
+'''
+from tree.hybride_tree  import *
+import sys
+
+def inserer(tree, fichier):
+    """Insérer successivement les mots du fichier dans l'arbre"""
+    if not isinstance(tree, HybrideTree):
+        raise TypeError("L'objet doit etre un hybride")
+    try: 
+        with open(fichier, "r") as f:
+            i = 0
+            for line in f :
+                mots = line.strip().split()
+                for mot in mots : 
+                    tree.inserer(mot, i)
+                    i += 1
+                    
+    except FileNotFoundError:
+        print(f"Le fichier '{fichier}' n'a pas été trouvé.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Une erreur s'est produite dans 'ajout': {e}")
+        sys.exit(1)

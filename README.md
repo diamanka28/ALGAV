@@ -45,7 +45,7 @@ Pour exécuter le projet, suivez ces étapes selon votre système d'exploitation
 2. **Accédez au répertoire principal du projet :**
     cd <chemin\vers\le\projet>\algav1\src\main
 3. **Exécutez le fichier principal avec Python :**
-    python main.py <action> <structure> <arbre ou fichier> [motif]
+    <python ou python3 ou py> main.py <action> <structure> <arbre ou fichier> [motif]
 
 
 

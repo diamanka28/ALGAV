@@ -1,6 +1,7 @@
 """
 Created on 11 déc. 2024
 @author: diamanka
+@author: omar
 tous les tests se font ici
 """
 
