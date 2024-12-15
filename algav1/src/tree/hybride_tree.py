@@ -176,6 +176,10 @@ class HybrideTree:
             elif mot[0] > node.caractere:
                 return _prefixe(node.sup, mot)
             else:
+                if mot[1:] == "" and (node.valeur or node.valeur == 0) :
+                    return 1 + _prefixe(node.eq, mot[1:])
+                
                 return _prefixe(node.eq, mot[1:])
 
         return _prefixe(self.root, mot)
+ 
