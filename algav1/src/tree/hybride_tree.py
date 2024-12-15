@@ -1,10 +1,5 @@
-'''
-Created on 13 déc. 2024
+from test import *
 
-@author: omar
-@author: diamanka
-'''
-from node.hybrid_node import *
 class HybrideTree:
     """
     Classe représentant un arbre Hybride Trie avec des valeurs entières.
@@ -21,7 +16,7 @@ class HybrideTree:
 
     def inserer(self, mot, valeur):
         """
-        Insère un mot avec une valeur entière dans l'arbre.
+        Insère un mot avec une valeur entière dans l'arbre et rééquilibre l'arbre si nécessaire.
         """
         def _inserer(node, mot, valeur):
             if not node:
@@ -41,6 +36,7 @@ class HybrideTree:
             return node
 
         self.root = _inserer(self.root, mot, valeur)
+        self.root = self._rebalance(self.root)  # Rééquilibrage après insertion
 
     def recherche(self, mot):
         """
@@ -81,7 +77,7 @@ class HybrideTree:
 
         self.root = _suppression(self.root, mot)
 
-    def number_mots(self,node):
+    def number_mots(self, node):
         """
         Compte le nombre de mots dans l'arbre.
         """
@@ -182,4 +178,95 @@ class HybrideTree:
                 return _prefixe(node.eq, mot[1:])
 
         return _prefixe(self.root, mot)
- 
+
+    def _rebalance(self, node):
+        """
+        Rééquilibre l'arbre si nécessaire après une insertion.
+        """
+        balance_factor = self._get_balance(node)
+        
+        # Si l'arbre est déséquilibré, effectuer une rotation
+        if balance_factor > 1:
+            if self._get_balance(node.inf) < 0:
+                node.inf = self._rotate_left(node.inf)  # Rotation gauche
+            node = self._rotate_right(node)  # Rotation droite
+
+        elif balance_factor < -1:
+            if self._get_balance(node.sup) > 0:
+                node.sup = self._rotate_right(node.sup)  # Rotation droite
+            node = self._rotate_left(node)  # Rotation gauche
+        
+        return node
+
+    def _get_balance(self, node):
+        """
+        Calcule le facteur d'équilibre du nœud.
+        """
+        if not node:
+            return 0
+        return self._get_height(node.inf) - self._get_height(node.sup)
+
+    def _get_height(self, node):
+        """
+        Calcule la hauteur d'un sous-arbre.
+        """
+        if not node:
+            return 0
+        return max(self._get_height(node.inf), self._get_height(node.sup)) + 1
+
+    def _rotate_left(self, node):
+        """
+        Effectue une rotation gauche pour rééquilibrer l'arbre.
+        """
+        new_root = node.sup
+        node.sup = new_root.inf
+        new_root.inf = node
+        return new_root
+
+    def _rotate_right(self, node):
+        """
+        Effectue une rotation droite pour rééquilibrer l'arbre.
+        """
+        new_root = node.inf
+        node.inf = new_root.sup
+        new_root.sup = node
+        return new_root
+
+
+# # Test à essayer
+
+# def test_hybride_tree():
+#     # Crée un arbre hybride
+#     arbre = HybrideTree()
+
+#     # Insère des mots dans l'arbre
+#     mots = ["chat", "chien", "cerf", "cheval", "crocodile"]
+#     for mot in mots:
+#         arbre.inserer(mot, 1)  # Insérer avec la valeur 1 pour chaque mot
+
+#     # Afficher les mots de l'arbre dans l'ordre alphabétique
+#     print("Liste des mots dans l'arbre :")
+#     print(arbre.liste_mots())
+
+#     # Tester la recherche de mots
+#     print("\nRecherche du mot 'chat' :")
+#     print(arbre.recherche("chat"))  # Devrait retourner 1
+
+#     print("\nRecherche du mot 'lion' :")
+#     print(arbre.recherche("lion"))  # Devrait retourner None
+
+#     # Tester le comptage des mots
+#     print("\nNombre total de mots dans l'arbre :")
+#     print(arbre.number_mots(arbre.root))
+
+#     # Tester la suppression d'un mot
+#     arbre.suppression("chien")
+#     print("\nListe des mots après suppression de 'chien' :")
+#     print(arbre.liste_mots())
+
+#     # Tester la profondeur moyenne
+#     print("\nProfondeur moyenne de l'arbre :")
+#     print(arbre.profondeur_moyenne())
+
+# 
+# test_hybride_tree()
