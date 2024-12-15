@@ -26,6 +26,13 @@ if __name__ == "__main__":
     parser.add_argument("prefix", nargs="?", help="le prefix à rechercher.")
 
     args = parser.parse_args()
+    
+    if len(sys.argv) == 1:
+        print("Bonjour Bienvenue !!!!")
+        
+        """truc à faire"""
+        sys.exit(1)
+        
     if not args.action or not args.structure:
         print("Usage : python3 rendu.py <action> <structure> <fichier> [<prefix> ou <fichier>]")
         sys.exit(1)
@@ -123,14 +130,13 @@ if __name__ == "__main__":
                     prefixe(tree, args.prefix, "prefixe.txt")
                     
                 elif args.action == "fusion":
-                    """if not args.fichier or not args.prefix:
+                    if not args.fichier or not args.prefix:
                         print("Il faut les deux fichiers pour la FUSION.")
                         sys.exit(1)
                     treeA = json_to_hybride(args.fichier)
                     treeB = json_to_hybride(args.prefix)
                     tree = fusion_hybride(treeA, treeB)
-                    hybride_to_json(tree, "trie.json")"""
-                    print("la fonction fusion est à dans manipHybride")
+                    hybride_to_json(tree, "trie.json")
                 else: 
                     print("Action inconnue pour Hybride Trie.")
             else:

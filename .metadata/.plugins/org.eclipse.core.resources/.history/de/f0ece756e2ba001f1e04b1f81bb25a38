@@ -1,0 +1,141 @@
+'''
+Created on 12 déc. 2024
+
+@author: diamanka
+@author :  omar 
+'''
+
+import argparse
+from rendu.manipTree import *
+from rendu.manipHybride import *
+import shutil
+columns, _ = shutil.get_terminal_size()
+print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>".center(columns))
+
+
+if __name__ == "__main__":
+    """
+    la ligne de commande 
+    """
+    parser = argparse.ArgumentParser(description="Gestion des arbres Patricia.")
+    parser.add_argument("action",nargs="?", choices=["inserer", "suppression", "listeMots", 
+                                                     "profondeurMoyenne", "prefixe", "fusion"], 
+                                                     help="Action à effectuer ")
+    parser.add_argument("structure", nargs="?", choices=["0", "1"], help="PATRICIA TRI ou HYBRIDE")
+    parser.add_argument("fichier", nargs="?", help="Nom du fichier à utiliser pour l'action.")
+    parser.add_argument("prefix", nargs="?", help="le prefix à rechercher.")
+
+    args = parser.parse_args()
+    if not args.action or not args.structure:
+        print("Usage : python3 rendu.py <action> <structure> <fichier> [<prefix> ou <fichier>]")
+        sys.exit(1)
+
+    else : # à faire selon l'action choisie
+        """print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>")
+        logique code d'abord selon la structure et ensuite l'action
+        """
+        if args.structure :# patricia ou hybride
+            """Partie PATRICIA"""
+            if args.structure == "0": #Avec la structure Patricia Trie
+                if args.action == "inserer":
+                    tree = PatriciaTree()
+                    if not args.fichier:
+                        print("Veillez spécifier le fichier")
+                        sys.exit(1)
+                    ajout(tree, args.fichier)
+                    patricia_to_json(tree, "pat.json")
+                    
+                elif args.action == "suppression":
+                    if not args.fichier:
+                        print("Veillez spécifier le fichier")
+                        sys.exit(1)
+                    tree = json_to_patricia("pat.json")
+                    supprime(tree, args.fichier)
+                    patricia_to_json(tree, "pat.json")
+                
+                elif args.action == "listeMots":
+                    if not args.fichier:
+                        print("Veillez spécifier le fichier représentant l'arbre")
+                        sys.exit(1)
+                    tree = json_to_patricia(args.fichier)
+                    lesmots(tree, "mot.txt")
+                    
+                elif args.action == "profondeurMoyenne":
+                    if not args.fichier:
+                        print("Veillez spécifier le fichier représentant l'arbre")
+                        sys.exit(1)
+                    tree = json_to_patricia(args.fichier)
+                    profond_moyenne(tree, "profondeur.txt")
+                
+                elif args.action == "prefixe":
+                    if not args.fichier or not args.prefix:
+                        print("le fichier ou le prefix")
+                        sys.exit(1)
+                    tree = json_to_patricia(args.fichier)
+                    prefixe(tree, "prefixe.txt", args.prefix)
+                elif args.action == "fusion":
+                    if not args.fichier or not args.prefix:
+                        print("Il faut les deux fichiers pour la FUSION")
+                        sys.exit(1)
+                    treeA = json_to_patricia(args.fichier)
+                    treeB = json_to_patricia(args.prefix)
+                    tree = fusion(treeA, treeB)
+                    patricia_to_json(tree, "pat.json")
+                else: 
+                    print("Action inconnue")
+            
+            elif args.structure == "1":  # Avec la structure Hybride Trie
+                if args.action == "inserer":
+                    tree = HybrideTree()
+                    if not args.fichier:
+                        print("Veuillez spécifier le fichier.")
+                        sys.exit(1)
+                    inserer(tree, args.fichier)
+                    hybride_to_json(tree, "trie.json")
+                    
+                elif args.action == "suppression":
+                    if not args.fichier:
+                        print("Veuillez spécifier le fichier.")
+                        sys.exit(1)
+                    tree = json_to_hybride("trie.json")
+                    supprimer(tree, args.fichier)
+                    hybride_to_json(tree, "trie.json")
+                
+                elif args.action == "listeMots":
+                    if not args.fichier:
+                        print("Veuillez spécifier le fichier représentant l'arbre.")
+                        sys.exit(1)
+                    tree = json_to_hybride(args.fichier)
+                    liste_mots(tree, "mot.txt")
+                    
+                elif args.action == "profondeurMoyenne":
+                    if not args.fichier:
+                        print("Veuillez spécifier le fichier représentant l'arbre.")
+                        sys.exit(1)
+                    tree = json_to_hybride(args.fichier)
+                    profondeur_moyenne(tree, "profondeur.txt")
+                
+                elif args.action == "prefixe":
+                    if not args.fichier or not args.prefix:
+                        print("Le fichier ou le préfixe est manquant.")
+                        sys.exit(1)
+                    tree = json_to_hybride(args.fichier)
+                    prefixe(tree, args.prefix, "prefixe.txt")
+                    
+                elif args.action == "fusion":
+                    f not args.fichier or not args.prefix:
+                        print("Il faut les deux fichiers pour la FUSION.")
+                        sys.exit(1)
+                    treeA = json_to_hybride(args.fichier)
+                    treeB = json_to_hybride(args.prefix)
+                    tree = fusion_hybride(treeA, treeB)
+                    hybride_to_json(tree, "trie.json")
+                    print("la fonction fusion est à dans manipHybride")
+                else: 
+                    print("Action inconnue pour Hybride Trie.")
+            else:
+                print("Structure inconnue, spécifiez 0 pour Patricia Trie ou 1 pour Hybride Trie.")
+                
+                
+                
+                

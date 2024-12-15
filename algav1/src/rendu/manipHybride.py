@@ -153,3 +153,32 @@ def prefixe(tree, prefixe, filename):
     except Exception as e:
         print(f"Une erreur s'est produite dans 'prefixe': {e}")
         sys.exit(1)
+        
+def fusion_hybride(treeA, treeB):
+    """
+    fusionne deux arbres d'hybride dont l'un d'entre eux est le résultant
+    """
+    if not isinstance(treeA, HybrideTree) or not isinstance(treeB, HybrideTree):
+        raise TypeError("fusion : les deux objets doivent etre des patricia")
+    
+    if treeA.est_vide() or treeB.est_vide():
+        return treeA if not treeA.est_vide() else treeB     
+    
+    """criteres de choix du resultant entre treeA et treeB"""
+    # le nombre de mots
+    retour = treeA if treeA.number_mots(treeA.root) >= treeB.number_mots(treeB.root) else treeB
+    """ lister les mots de l'autre arbre"""
+    mots = treeA.liste_mots() if treeA.number_mots(treeA.root) < treeB.number_mots(treeB.root) else treeB.liste_mots()
+    
+    """récupérer la derniere valeur de l'arbre à retourner"""
+    valeur = treeA.number_mots(treeA.root) if treeA.number_mots(treeA.root) >= treeB.number_mots(treeB.root) else treeB.number_mots()
+    
+    for mot in mots :
+        retour.inserer(mot, valeur)
+        valeur += 1
+    
+    return retour
+    
+    
+
+
