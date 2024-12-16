@@ -36,7 +36,7 @@ class HybrideTree:
             return node
 
         self.root = _inserer(self.root, mot, valeur)
-        self.root = self._rebalance(self.root)  # Rééquilibrage après insertion
+        #self.root = self._rebalance(self.root)  # Rééquilibrage après insertion
 
     def recherche(self, mot):
         """
@@ -233,40 +233,30 @@ class HybrideTree:
         return new_root
 
 
-# # Test à essayer
+# Test à essayer
 
-# def test_hybride_tree():
-#     # Crée un arbre hybride
-#     arbre = HybrideTree()
+def test_hybride_tree():
+    # Crée un arbre hybride
+    arbre = HybrideTree()
 
-#     # Insère des mots dans l'arbre
-#     mots = ["chat", "chien", "cerf", "cheval", "crocodile"]
-#     for mot in mots:
-#         arbre.inserer(mot, 1)  # Insérer avec la valeur 1 pour chaque mot
+    # Insère des mots dans l'arbre
+    #mots = ["chat", "chien", "cerf", "cheval", "crocodile"]
+    with open("../main/exemple de base", "r") as f:
+        for line in f:
+            mots = line.strip().split()
+            for mot in mots:
+                arbre.inserer(mot, 1)  # Insérer avec la valeur 1 pour chaque mot
 
-#     # Afficher les mots de l'arbre dans l'ordre alphabétique
-#     print("Liste des mots dans l'arbre :")
-#     print(arbre.liste_mots())
+    # Afficher les mots de l'arbre dans l'ordre alphabétique     print("Liste des mots dans l'arbre :")
+    print(arbre.liste_mots())
 
-#     # Tester la recherche de mots
-#     print("\nRecherche du mot 'chat' :")
-#     print(arbre.recherche("chat"))  # Devrait retourner 1
+    # Tester la profondeur moyenne
+    print("\nProfondeur moyenne de l'arbre :")
+    print(arbre.profondeur_moyenne())
+    
+    #la hauteur de l'arbre
+    print("\nLa hauteur de l'arbre")
+    print(arbre.hauteur())
 
-#     print("\nRecherche du mot 'lion' :")
-#     print(arbre.recherche("lion"))  # Devrait retourner None
 
-#     # Tester le comptage des mots
-#     print("\nNombre total de mots dans l'arbre :")
-#     print(arbre.number_mots(arbre.root))
-
-#     # Tester la suppression d'un mot
-#     arbre.suppression("chien")
-#     print("\nListe des mots après suppression de 'chien' :")
-#     print(arbre.liste_mots())
-
-#     # Tester la profondeur moyenne
-#     print("\nProfondeur moyenne de l'arbre :")
-#     print(arbre.profondeur_moyenne())
-
-# 
-# test_hybride_tree()
+test_hybride_tree()
