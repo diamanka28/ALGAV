@@ -26,21 +26,43 @@ if __name__ == "__main__":
     parser.add_argument("prefix", nargs="?", help="le prefix à rechercher.")
 
     args = parser.parse_args()
-    
+    # Cas où aucun argument n'est fourni
     if len(sys.argv) == 1:
-        print("Bonjour Bienvenue !!!!")
-        
-        """truc à faire"""
-        sys.exit(1)
-        
+    
+        # Patricia Trie Test
+        print("### Test Patricia Trie ###")
+        tree_patricia = PatriciaTree()
+        mots_patricia = ["arbre", "algorithme", "avance", "python", "patricia", "trie"]
+        for mot in mots_patricia:
+            tree_patricia.insertion(mot)
+        print("Mots insérés dans Patricia Trie : ", mots_patricia)
+        print("Liste des mots dans Patricia Trie :", tree_patricia.ListeMots())
+        print("Nombre de mots dans Patricia Trie :", tree_patricia.ComptageMots())
+        print("La profondeur moyenne de l'arbre :", tree_patricia.ProfondeurMoyenne())
+        print("L'hauteur de l'arbre :", tree_patricia.Hauteur())
+        print("Le nombre de nil de l'arbre :", tree_patricia.ComptageNil())
+
+        # Hybride Trie Test
+        print("\n### Test Hybride Trie ###")
+        tree_hybride = HybrideTree()
+        mots_hybride = [("arbre", 1), ("algorithme", 2), ("avance", 3), ("python", 4), ("hybride", 5)]
+        for mot, valeur in mots_hybride:
+            tree_hybride.inserer(mot, valeur)
+        print("Mots insérés dans Hybride Trie : ", [mot for mot, _ in mots_hybride])
+        print("Liste des mots dans Hybride Trie :", tree_hybride.liste_mots())
+        print("Nombre de mots dans Hybride Trie :", tree_hybride.number_mots(tree_hybride.root))
+        print("La profondeur moyenne de l'arbre :", tree_hybride.profondeur_moyenne())
+        print("L'hauteur de l'arbre :", tree_hybride.hauteur())
+        print("Le nombre de nil de l'arbre :", tree_hybride.comptage_nil())
+
+        sys.exit(0)  # Terminer après les tests pratiques
+
+    #Arguments en ligne de commande mais incomplet
     if not args.action or not args.structure:
         print("Usage : python3 rendu.py <action> <structure> <fichier> [<prefix> ou <fichier>]")
         sys.exit(1)
-
+    #Arguments complets
     else : # à faire selon l'action choisie
-        """print("<<<<<<<PATRICIA & HYBRIDE TRIE>>>>>>>>")
-        logique code d'abord selon la structure et ensuite l'action
-        """
         if args.structure :# patricia ou hybride
             """Partie PATRICIA"""
             if args.structure == "0": #Avec la structure Patricia Trie
@@ -141,7 +163,4 @@ if __name__ == "__main__":
                     print("Action inconnue pour Hybride Trie.")
             else:
                 print("Structure inconnue, spécifiez 0 pour Patricia Trie ou 1 pour Hybride Trie.")
-                
-                
-                
                 

@@ -41,7 +41,10 @@ Pour exécuter le projet, suivez ces étapes selon votre système d'exploitation
     
 ### Sur Windows :
 1. **Ajoutez le chemin du projet à la variable d'environnement PYTHONPATH :**
-    set PYTHONPATH=%PYTHONPATH%;<chemin\vers\le\projet>\algav1\src
+    **Avec cmd :**
+        set PYTHONPATH=%PYTHONPATH%;<chemin\vers\le\projet>\algav1\src
+    **Avec powerShell :**
+        $env:PYTHONPATH = "$env:PYTHONPATH;<chemin\vers\le\projet>\algav1\src"
 2. **Accédez au répertoire principal du projet :**
     cd <chemin\vers\le\projet>\algav1\src\main
 3. **Exécutez le fichier principal avec Python :**
