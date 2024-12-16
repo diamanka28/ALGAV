@@ -1,3 +1,5 @@
+Voici une explication similaire appliquée à la structure `HybrideTree` :
+
 ### Structure d’un nœud de `HybrideTree`
 
 **Caractère :**
@@ -39,3 +41,34 @@
 - L’optimisation mémoire permet de stocker efficacement les mots et d’éviter les chevauchements inutiles.
 - Le modèle de navigation est cohérent et réduit les calculs redondants, car il repose sur des comparaisons simples de caractères.
 
+### Fusion de deux `HybrideTree`
+
+**Cas particuliers :**
+- Si l’un des deux arbres est vide, la fusion consiste simplement à retourner l'autre arbre.
+- Si les arbres contiennent des mots communs, ces mots doivent être insérés sans doublons.
+
+**Points Clés :**
+- **Maintenir les propriétés du `HybrideTree`** : Lors de la fusion, l'arbre résultant doit respecter les règles d’organisation du trie hybride, notamment en ce qui concerne les relations entre les caractères dans les différents sous-arbres.
+- **Choisir l'arbre de base** : Lors de la fusion, il est important de choisir l'arbre ayant un nombre de mots plus faible ou moins de profondeur pour éviter une croissance excessive.
+- **Lister les mots du deuxième arbre** : Pour fusionner les deux arbres, il faut d'abord extraire les mots du second arbre.
+- **Insertion des mots dans l'arbre de base** : Chaque mot du deuxième arbre doit être inséré récursivement dans l'arbre de base. Cette insertion doit respecter la structure de trie hybride.
+
+Cette approche pour la fusion vise à maximiser l’efficacité et à minimiser les redondances, tout en préservant l'intégrité des propriétés du `HybrideTree`.
+
+
+REEQUILIBRAGE HYBRIDE
+    Un Hybrid Trie peut devenir déséquilibré après plusieurs ajouts successifs. Un arbre déséquilibré entraîne une recherche inefficace car certaines branches deviennent            plus profondes que d'autres. L'objectif est de garantir une hauteur équilibrée entre les sous-arbres gauche (inf) et droit (sup) tout en maintenant l'ordre des mots
+    Facteur de déséquilibre :
+        Le facteur de déséquilibre est défini comme la différence entre le nombre de mots des sous-arbres inf et sup d'un nœud.
+        Un facteur positif indique que le sous-arbre gauche est plus "lourd", tandis qu'un facteur négatif indique que le sous-arbre droit est plus "lourd"
+    Seuil de déséquilibre :
+        Un seuil (seuil) est défini pour déterminer si un nœud est déséquilibré. Par exemple, un seuil de 3 signifie qu'un déséquilibre est toléré 
+        tant que la différence entre les sous-arbres gauche et droit est ≤ 3. Si le déséquilibre dépasse ce seuil, une rotation est nécessaire pour rééquilibrer.
+
+    Rotations pour rééquilibrer :
+        Rotation gauche : Effectuée lorsque le sous-arbre droit (sup) est trop lourd. Elle remonte un nœud de sup comme nouvelle racine.
+        Rotation droite : Effectuée lorsque le sous-arbre gauche (inf) est trop lourd. Elle remonte un nœud de inf comme nouvelle racine.
+
+    Rééquilibrage récursif :
+        Après chaque insertion, vérifiez et ajustez le déséquilibre en remontant la structure de l'arbre.
+        Les rotations sont propagées vers le haut, garantissant que chaque niveau de l'arbre est équilibré.
