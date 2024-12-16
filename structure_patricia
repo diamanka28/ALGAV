@@ -1,8 +1,22 @@
+Caractere de fin:
+     Pour faciliter le partage des préfixes on ajoute un indicateur explicite de fin.
+     Quel caractère choisir ?
+      Caractère \x00 (ASCII 0) :
+        Rarement utilisé dans les dictionnaires textuels.
+        Non imprimable, donc ne perturbe pas les mots visibles.
+        Facile à ajouter et détecter dans le code.
+    avantages:
+        Simplifie l'insertion, la recherche, et la suppression sans nécessiter de champs supplémentaires.
+	Pratique pour travailler avec des mots ASCII standards.
+    limites :
+    	Si le caractère \x00 est utilisé dans les mots (cas rare), cela pourrait poser problème. 
+    	Un caractère différent pourrait être choisi selon le contexte ( ceci n'est pas traité dans notre code).
+
 Structure d'un nœud Patricia
 
     Clé (String de 128 caractères maximum) :
         La clé est la sous-chaîne associée au nœud, représentant un segment du mot ou un mot complet.
-        L’indicateur de fin est intégré directement à la clé (par exemple, via un caractère spécial comme \x00 pour marquer la fin du mot).
+        L’indicateur de fin est intégré directement à la clé (comme \x00 pour marquer la fin du mot).
 
     Frère immédiat (Sibling) :
         Un pointeur vers le nœud frère.
