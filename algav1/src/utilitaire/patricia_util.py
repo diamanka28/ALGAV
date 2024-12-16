@@ -1,6 +1,7 @@
 '''
 Created on 27 nov. 2024
 @author: diamanka
+@author: omar
 '''
 
 def print_ascii():
