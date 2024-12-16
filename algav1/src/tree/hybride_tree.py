@@ -36,7 +36,7 @@ class HybrideTree:
             return node
 
         self.root = _inserer(self.root, mot, valeur)
-        #self.root = self._rebalance(self.root)  # Rééquilibrage après insertion
+        self.root = self.reequilibrer(self.root)  # Rééquilibrage après insertion
 
     def recherche(self, mot):
         """
@@ -179,84 +179,76 @@ class HybrideTree:
 
         return _prefixe(self.root, mot)
 
-    def _rebalance(self, node):
+    def calculDesequilibre(self, node):
         """
-        Rééquilibre l'arbre si nécessaire après une insertion.
+        Calcule le facteur de déséquilibre pour un nœud donné.
         """
-        balance_factor = self._get_balance(node)   #Facteur d’équilibre = Hauteur du sous arbre gauche − Hauteur du sous arbre droit
-        
-        # Si l'arbre est déséquilibré, effectuer une rotation
-        if balance_factor > 1:
-            if self._get_balance(node.inf) < 0:
-                node.inf = self._rotate_left(node.inf)  # Rotation gauche
-            node = self._rotate_right(node)  # Rotation droite
+        if not node:
+            return 0
+        inf_value = self.comptage_mots(node.inf)
+        sup_value = self.comptage_mots(node.sup)
+        return inf_value - sup_value
 
-        elif balance_factor < -1:
-            if self._get_balance(node.sup) > 0:
-                node.sup = self._rotate_right(node.sup)  # Rotation droite
-            node = self._rotate_left(node)  # Rotation gauche
-        
+    def reequilibrer(self, node):
+        """
+        Rééquilibre un sous-arbre si nécessaire.
+        """
+        if not node:
+            return None
+
+        facteur = self.calculDesequilibre(node)
+        seuil = 3  # Définissez le seuil pour le déséquilibre
+
+        # Si le facteur de déséquilibre dépasse le seuil
+        if facteur > seuil:
+            if node.inf and self.calculDesequilibre(node.inf) < -seuil:
+                node.inf = self.rotationGauche(node.inf)
+            node = self.rotationDroite(node)
+
+        elif facteur < -seuil:
+            if node.sup and self.calculDesequilibre(node.sup) > seuil:
+                node.sup = self.rotationDroite(node.sup)
+            node = self.rotationGauche(node)
+
         return node
 
-    def _get_balance(self, node):
+    def rotationGauche(self, node):
         """
-        Calcule le facteur d'équilibre du nœud.
-        """
-        if not node:
-            return 0
-        return self._get_height(node.inf) - self._get_height(node.sup)
-
-    def _get_height(self, node):
-        """
-        Calcule la hauteur d'un sous-arbre.
-        """
-        if not node:
-            return 0
-        return max(self._get_height(node.inf), self._get_height(node.sup)) + 1
-
-    def _rotate_left(self, node):
-        """
-        Effectue une rotation gauche pour rééquilibrer l'arbre.
+        Effectue une rotation gauche sur un nœud.
         """
         new_root = node.sup
         node.sup = new_root.inf
         new_root.inf = node
         return new_root
 
-    def _rotate_right(self, node):
+    def rotationDroite(self, node):
         """
-        Effectue une rotation droite pour rééquilibrer l'arbre.
+        Effectue une rotation droite sur un nœud.
         """
         new_root = node.inf
         node.inf = new_root.sup
         new_root.sup = node
         return new_root
 
+    def comptage_mots(self, node):
+        """
+        Compte le nombre de mots dans un sous-arbre.
+        """
+        if not node:
+            return 0
+        count = 1 if node.valeur is not None else 0
+        count += self.comptage_mots(node.inf)
+        count += self.comptage_mots(node.eq)
+        count += self.comptage_mots(node.sup)
+        return count
 
-# Test à essayer
-
-def test_hybride_tree():
-    # Crée un arbre hybride
-    arbre = HybrideTree()
-
-    # Insère des mots dans l'arbre
-    #mots = ["chat", "chien", "cerf", "cheval", "crocodile"]
-    with open("../main/exemple de base", "r") as f:
-        for line in f:
-            mots = line.strip().split()
-            for mot in mots:
-                arbre.inserer(mot, 1)  # Insérer avec la valeur 1 pour chaque mot
-
-    # Afficher les mots de l'arbre dans l'ordre alphabétique     print("Liste des mots dans l'arbre :")
-    print(arbre.liste_mots())
-
-    # Tester la profondeur moyenne
-    print("\nProfondeur moyenne de l'arbre :")
-    print(arbre.profondeur_moyenne())
-    
-    #la hauteur de l'arbre
-    print("\nLa hauteur de l'arbre")
-    print(arbre.hauteur())
-
-
-test_hybride_tree()
+tree = HybrideTree()
+with open("../main/exemple de base", "r") as f:
+    for ligne in f :
+        mots = ligne.strip().split()
+        for mot in mots:
+            tree.inserer(mot, 1)
+            
+print("\nLes mots de l'arbre: ", tree.liste_mots())
+print("\nProfondeur moyenne:\n", tree.profondeur_moyenne())
+print("\nHauteur: \n", tree.hauteur())

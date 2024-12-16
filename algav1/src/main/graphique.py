@@ -9,7 +9,7 @@ GRAPHIQUE
 
 import tkinter as tk
 from tkinter import messagebox
-from tree.hybride_tree import *
+from tree.hybride_tree import HybrideTree
 
 
 # Interface graphique Tkinter
@@ -19,7 +19,7 @@ class HybridTrieApp:
         self.root = root
         self.root.title("Gestion de HybridTrie")
 
-        self.trie = HybridTrie()
+        self.trie = HybrideTree()
 
         # Entrée pour le mot
         tk.Label(root, text="Mot :").grid(row=0, column=0, padx=10, pady=10)
