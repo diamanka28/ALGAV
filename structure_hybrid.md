@@ -1,5 +1,3 @@
-Voici une explication similaire appliquée à la structure `HybrideTree` :
-
 ### Structure d’un nœud de `HybrideTree`
 
 **Caractère :**
