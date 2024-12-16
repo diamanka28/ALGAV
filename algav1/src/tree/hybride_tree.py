@@ -183,7 +183,7 @@ class HybrideTree:
         """
         Rééquilibre l'arbre si nécessaire après une insertion.
         """
-        balance_factor = self._get_balance(node)
+        balance_factor = self._get_balance(node)   #Facteur d’équilibre = Hauteur du sous arbre gauche − Hauteur du sous arbre droit
         
         # Si l'arbre est déséquilibré, effectuer une rotation
         if balance_factor > 1:
