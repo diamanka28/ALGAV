@@ -1,0 +1,45 @@
+'''
+Created on 16 déc. 2024
+
+@author: diamanka
+'''
+import time
+from shakespeare.utils import (
+    load_shakespeare_words,
+    construct_patricia_tree,
+    construct_hybride_tree,
+    save_tree_to_json,
+    compare_trees,
+)
+
+# Chemin du dossier contenant les fichiers de Shakespeare
+shakespeare_directory = "./Shakespeare"
+
+print("=== Chargement des mots des fichiers de Shakespeare ===")
+start_time = time.time()
+words = load_shakespeare_words(shakespeare_directory)
+print(f"Nombre de mots chargés : {len(words)}")
+print(f"Temps de chargement : {time.time() - start_time:.2f} secondes\n")
+
+print("=== Construction du Patricia Trie ===")
+start_time = time.time()
+patricia_tree = construct_patricia_tree(words)
+print(f"Temps de construction : {time.time() - start_time:.2f} secondes\n")
+
+print("=== Construction du Hybrid Trie ===")
+start_time = time.time()
+hybride_tree = construct_hybride_tree(words)
+print(f"Temps de construction : {time.time() - start_time:.2f} secondes\n")
+
+print("=== Sauvegarde des arbres en JSON ===")
+save_tree_to_json(patricia_tree, "patricia_tree.json", "patricia")
+save_tree_to_json(hybride_tree, "hybride_tree.json", "hybride")
+print("Fichiers JSON créés : patricia_tree.json, hybride_tree.json\n")
+
+print("=== Comparaison des deux arbres ===")
+compare_trees(patricia_tree, hybride_tree)
+
+
+    
+    
+    

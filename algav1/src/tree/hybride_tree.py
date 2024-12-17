@@ -241,14 +241,3 @@ class HybrideTree:
         count += self.comptage_mots(node.eq)
         count += self.comptage_mots(node.sup)
         return count
-
-tree = HybrideTree()
-with open("../main/exemple de base", "r") as f:
-    for ligne in f :
-        mots = ligne.strip().split()
-        for mot in mots:
-            tree.inserer(mot, 1)
-            
-print("\nLes mots de l'arbre: ", tree.liste_mots())
-print("\nProfondeur moyenne:\n", tree.profondeur_moyenne())
-print("\nHauteur: \n", tree.hauteur())

@@ -11,7 +11,6 @@ import tkinter as tk
 from tkinter import messagebox
 from tree.hybride_tree import HybrideTree
 
-
 # Interface graphique Tkinter
 class HybridTrieApp:
 

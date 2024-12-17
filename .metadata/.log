@@ -3694,3 +3694,111 @@ java.nio.channels.ClosedByInterruptException
 	at org.python.pydev.editor.hover.PydevCombiningHover.getHoverInfo(PydevCombiningHover.java:141)
 	at org.python.pydev.editor.hover.PyEditorTextHoverProxy.getHoverInfo(PyEditorTextHoverProxy.java:59)
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:157)
+
+!ENTRY org.python.pydev.shared_core 4 4 2024-12-16 23:38:45.115
+!MESSAGE ERROR reading shell. Message sent: @@IMPORTS:builtins.hybride_tree
+END@@
+
+ProcessInfo:
+
+ - Executed: /usr/bin/python3 -u /home/diamanka/.p2/pool/plugins/org.python.pydev.core_12.2.0.202409031913/pysrc/pycompletionserver.py 36207
+
+ - Environment:
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+DESKTOP_SESSION=ubuntu
+DISPLAY=:0
+GDK_CORE_DEVICE_EVENTS=1
+GDMSESSION=ubuntu
+GIO_LAUNCHED_DESKTOP_FILE=/home/diamanka/.local/share/applications/epp.package.java.desktop
+GIO_LAUNCHED_DESKTOP_FILE_PID=4845
+GJS_DEBUG_OUTPUT=stderr
+GJS_DEBUG_TOPICS=JS ERROR;JS LOG
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GNOME_SETUP_DISPLAY=:1
+GNOME_SHELL_SESSION_MODE=ubuntu
+GSM_SKIP_SSH_AGENT_WORKAROUND=true
+GTK_MODULES=gail:atk-bridge
+HOME=/home/diamanka
+IM_CONFIG_PHASE=1
+INVOCATION_ID=685752ebd8ba4d29a2f10ed8a6935db9
+JOURNAL_STREAM=8:15962
+LANG=fr_FR.UTF-8
+LIBOVERLAY_SCROLLBAR=0
+LOGNAME=diamanka
+MANAGERPID=2066
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+OXYGEN_DISABLE_INNER_SHADOWS_HACK=1
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+PWD=/home/diamanka
+PYTHONPATH=/home/diamanka/.p2/pool/plugins/org.python.pydev.core_12.2.0.202409031913/pysrc/pydev_sitecustomize:/usr/lib/python3.12:/usr/lib/python3.12/lib-dynload:/usr/local/lib/python3.12/dist-packages:/usr/lib/python3/dist-packages
+QT_ACCESSIBILITY=1
+QT_IM_MODULE=ibus
+SESSION_MANAGER=local/diamanka-VirtualBox:@/tmp/.ICE-unix/2270,unix/diamanka-VirtualBox:/tmp/.ICE-unix/2270
+SHELL=/bin/bash
+SHLVL=0
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+SYSTEMD_EXEC_PID=2315
+USER=diamanka
+USERNAME=diamanka
+WAYLAND_DISPLAY=wayland-0
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.UGZAZ2
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+XDG_MENU_PREFIX=gnome-
+XDG_RUNTIME_DIR=/run/user/1000
+XDG_SESSION_CLASS=user
+XDG_SESSION_DESKTOP=ubuntu
+XDG_SESSION_TYPE=wayland
+XMODIFIERS=@im=ibus
+_=/usr/bin/gnome-session
+
+ - Working Dir:
+/home/diamanka/eclipse/java-2023-09/eclipse/../../../.p2/pool/plugins/org.python.pydev.core_12.2.0.202409031913/pysrc
+
+ - OS:
+Linux
+
+ - Std output:
+
+
+ - Err output:
+
+!STACK 0
+java.nio.channels.ClosedByInterruptException
+	at java.base/java.nio.channels.spi.AbstractInterruptibleChannel.end(AbstractInterruptibleChannel.java:200)
+	at java.base/sun.nio.ch.SocketChannelImpl.endRead(SocketChannelImpl.java:396)
+	at java.base/sun.nio.ch.SocketChannelImpl.blockingRead(SocketChannelImpl.java:1346)
+	at java.base/sun.nio.ch.SocketInputStream.read(SocketInputStream.java:68)
+	at java.base/java.io.InputStream.read(InputStream.java:220)
+	at org.python.pydev.ast.codecompletion.shell.AbstractShell.read(AbstractShell.java:457)
+	at org.python.pydev.ast.codecompletion.shell.AbstractShell.read(AbstractShell.java:515)
+	at org.python.pydev.ast.codecompletion.shell.AbstractShell.writeAndGetResults(AbstractShell.java:710)
+	at org.python.pydev.ast.codecompletion.shell.AbstractShell.writeAndGetResults(AbstractShell.java:702)
+	at org.python.pydev.ast.codecompletion.shell.CompletionsShell.getImportCompletions(CompletionsShell.java:63)
+	at org.python.pydev.ast.codecompletion.revisited.modules.CompiledModule.createInnerFromServer(CompiledModule.java:347)
+	at org.python.pydev.ast.codecompletion.revisited.modules.CompiledModule.getGlobalTokens(CompiledModule.java:551)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.internalGenerateGetCompletionsForModule(AbstractASTManager.java:890)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.getCompletionsForModule(AbstractASTManager.java:710)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.getCompletionsForModule(AbstractASTManager.java:660)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.internalGenerateGetCompletionsForModule(AbstractASTManager.java:902)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.getCompletionsForModule(AbstractASTManager.java:710)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.getCompletionsForModule(AbstractASTManager.java:660)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.internalGenerateGetCompletionsForModule(AbstractASTManager.java:880)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.getCompletionsForModule(AbstractASTManager.java:710)
+	at org.python.pydev.ast.codecompletion.revisited.AbstractASTManager.getCompletionsForModule(AbstractASTManager.java:670)
+	at org.python.pydev.ast.codecompletion.revisited.modules.SourceModule.internalFindGlobalTokDef(SourceModule.java:1370)
+	at org.python.pydev.ast.codecompletion.revisited.modules.SourceModule.findGlobalTokDef(SourceModule.java:1338)
+	at org.python.pydev.ast.codecompletion.revisited.modules.SourceModule.findDefinitionsFromModAndTok(SourceModule.java:1280)
+	at org.python.pydev.ast.codecompletion.revisited.modules.SourceModule.findDefinition(SourceModule.java:1262)
+	at org.python.pydev.ast.codecompletion.revisited.modules.SourceModule.findDefinition(SourceModule.java:825)
+	at org.python.pydev.ast.codecompletion.revisited.modules.SourceModule.findDefinition(SourceModule.java:1)
+	at org.python.pydev.ast.refactoring.PyRefactoringFindDefinition.findActualDefinition(PyRefactoringFindDefinition.java:211)
+	at org.python.pydev.ast.refactoring.PyRefactoringFindDefinition.findActualDefinition(PyRefactoringFindDefinition.java:92)
+	at org.python.pydev.editor.hover.PyDocstringTextHover.getDocstringHover(PyDocstringTextHover.java:101)
+	at org.python.pydev.editor.hover.PyDocstringTextHover.getHoverInfo(PyDocstringTextHover.java:59)
+	at org.python.pydev.editor.hover.PydevCombiningHover.getHoverInfo(PydevCombiningHover.java:141)
+	at org.python.pydev.editor.hover.PyEditorTextHoverProxy.getHoverInfo(PyEditorTextHoverProxy.java:59)
+	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:157)

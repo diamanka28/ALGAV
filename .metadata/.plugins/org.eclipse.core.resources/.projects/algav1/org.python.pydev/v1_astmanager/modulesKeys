@@ -9,6 +9,8 @@ rendu.__init__|/home/diamanka/git/ALGAV/algav1/src/rendu/__init__.py
 rendu.manipHybride|/home/diamanka/git/ALGAV/algav1/src/rendu/manipHybride.py
 rendu.manipTree|/home/diamanka/git/ALGAV/algav1/src/rendu/manipTree.py
 shakespeare.__init__|/home/diamanka/git/ALGAV/algav1/src/shakespeare/__init__.py
+shakespeare.shakespeare|/home/diamanka/git/ALGAV/algav1/src/shakespeare/shakespeare.py
+shakespeare.utils|/home/diamanka/git/ALGAV/algav1/src/shakespeare/utils.py
 tree.__init__|/home/diamanka/git/ALGAV/algav1/src/tree/__init__.py
 tree.hybride_tree|/home/diamanka/git/ALGAV/algav1/src/tree/hybride_tree.py
 tree.patricia_tree|/home/diamanka/git/ALGAV/algav1/src/tree/patricia_tree.py

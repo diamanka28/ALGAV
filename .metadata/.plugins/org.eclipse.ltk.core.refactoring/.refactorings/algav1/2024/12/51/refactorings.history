@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;algav1/src/shakespeare/__init__.py&apos; to &apos;util.py&apos;" description="Rename resource &apos;__init__.py&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/shakespeare/__init__.py" name="util.py" stamp="1734367233344" updateReferences="true"/>
+</session>

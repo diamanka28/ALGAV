@@ -1,0 +1,8 @@
+'''
+Created on 16 déc. 2024
+
+@author: diamanka
+'''
+
+if __name__ == '__main__':
+    print("HI")
