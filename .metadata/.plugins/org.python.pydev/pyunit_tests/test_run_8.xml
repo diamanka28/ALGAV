@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pydev-testrun version="1.0"?><pydev-testsuite>
-    <summary errors="1" failures="0" finished="true" name="Test Run: 8" tests="0" total_time="Finished in: 0.00 secs."/>
+    <summary errors="1" failures="0" finished="true" name="Test Run: 9" tests="0" total_time="Finished in: 0.00 secs."/>
     <test location="/home/diamanka/git/ALGAV/algav1/src/shakespeare/utils.py" status="error" test="utils" time="0">
         <stdout/>
         <stderr><![CDATA[Traceback (most recent call last):

@@ -20,7 +20,9 @@ Implémente les Patricia & Hybride Tries, y compris les opérations principales 
 Inclut des fonctions haut-niveau permettant de manipuler les arbres à partir des données externes (fichiers, JSON).
 
 ### 'shakespeare'
-Shakespeare : Contient l'ensemble des fichiers textes de l'œuvre complète de William Shakespeare.
+Contient l'ensemble des fichiers textes de l'œuvre complète de William Shakespeare.
+
+### 'shake'
 consArbre.py : Fonctions pour construire les structures à partir des mots de Shakespeare.
 patricia_tree_comp.py : Implémentation de PatriciaTree avec compteur de comparaisons.
 hybride_tree_comp.py : Implémentation de HybrideTree avec compteur de comparaisons.

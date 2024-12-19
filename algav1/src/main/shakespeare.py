@@ -6,14 +6,14 @@ Created on 16 déc. 2024
 
 import time
 import os
-from shakespeare.consArbre import *
-from shakespeare.hybride_tree_comp import *
-from shakespeare.patricia_tree_comp import *
+from shake.consArbre import *
+from shake.hybride_tree_comp import *
+from shake.patricia_tree_comp import *
 
 
 if __name__ == '__main__':
     
-    shakespeare_directory = os.path.join(os.path.dirname(__file__), "../shakespeare/Shakespeare")
+    shakespeare_directory = os.path.join(os.path.dirname(__file__), "../Shakespeare")
     
     # Charger tous les mots des fichiers de Shakespeare
     print("=== Chargement des mots des fichiers de Shakespeare ===")
@@ -25,20 +25,18 @@ if __name__ == '__main__':
     patricia_tree = PatriciaTree()
     PatriciaTree.reset_comparison_count()
     start_time = time.time()
-    for word in words:
-        patricia_tree.insertion(word)
+    patricia_tree = construct_patricia_tree(words)
     patricia_time = time.time() - start_time
-    print(f"Patricia Trie construit avec {PatriciaTree.comparison_count} comparaisons en {patricia_time:.4f} secondes.\n")
+    print(f"Patricia Trie construit avec {patricia_tree.ComptageMots()} mots en {patricia_time:.4f} secondes et  {PatriciaTree.comparison_count} comparaisons .\n")
     
     # Hybride Trie
     print("=== Construction du Hybride Trie ===")
     hybride_tree = HybrideTree()
     HybrideTree.reset_comparison_count()
     start_time = time.time()
-    for idx, word in enumerate(words):
-        hybride_tree.inserer(word, idx)
+    hybride_tree = construct_hybride_tree(words)
     hybride_time = time.time() - start_time
-    print(f"Hybride Trie construit avec {HybrideTree.comparison_count} comparaisons en {hybride_time:.4f} secondes.\n")
+    print(f"Hybride Trie construit avec {hybride_tree.comptage_mots(hybride_tree.root)} mots en {hybride_time:.4f} secondes et {HybrideTree.comparison_count} comparaisons.\n")
     
     # Comparaison
     print("=== Comparaison des deux structures ===")
